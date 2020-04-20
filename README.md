@@ -74,7 +74,7 @@ fakerE.iteration(
   <body>
     <script defer>
       fakerE.frequency({ a: 10, b: 10, c: 90 });
-      fakerE.iteration(Math.random, 5, 20);g
+      fakerE.iteration(Math.random, 5, 20);
     </script>
   </body>
 <html>
