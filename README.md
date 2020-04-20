@@ -1,6 +1,8 @@
-# 🎠 Faker.js Enhanced 
+# 🎠 Faker.js Enhanced
 
 [![](https://travis-ci.org/schalkventer/react-html-connector.svg?branch=master)](https://travis-ci.org/schalkventer/react-html-connect) [![](https://img.shields.io/npm/dm/react-html-connector.svg)](https://www.npmjs.com/package/react-html-connector) [![](https://img.shields.io/badge/stability-experimental-orange.svg)](#package-state)
+
+`1.0.1`
 
 **Adds additional functionality and configurations options to base Faker.js library**
 
