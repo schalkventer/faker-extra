@@ -1,24 +1,29 @@
 {
-  "name": "faker-extended",
-  "version": "0.0.1",
+  "name": "faker-enhanced",
+  "version": "1.0.0",
   "description": "Adds additional functionality and configuration options to base Faker.js library",
   "author": "Schalk Venter <venterschalk@gmail.com>",
   "license": "ISC",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "homepage": "https://github.com/schalkventer/faker-extra",
+  "homepage": "https://github.com/schalkventer/faker-enhanced",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "test": "jest"
   },
   "devDependencies": {
     "@types/faker": "^4.1.11",
-    "faker": "4.1.x"
+    "@types/jest": "^25.2.1",
+    "faker": "4.1.x",
+    "jest": "^25.4.0",
+    "ts-jest": "^25.4.0",
+    "typescript": "^3.8.3"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/schalkventer/faker-extra.git"
+    "url": "git+https://github.com/schalkventer/faker-enhanced.git"
   },
   "bugs": {
-    "url": "https://github.com/schalkventer/faker-extra/issues"
+    "url": "https://github.com/schalkventer/faker-enhanced/issues"
   }
 }

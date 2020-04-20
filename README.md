@@ -24,9 +24,10 @@ const uniqueIds = fakerE.iteration(
   () => Math.floor(Math.random() * 1000000000)
 );
 
-fakerE.iteration(
+fakerE.object(
   uniqueIds, 
   () => ({ 
+    awards: fakerE.array([0, 3], ['red', 'green', 'blue', 'orange'], true).
     score: Math.round(Math.random() * 1000),
     league: fakerE.frequency({ 70: 'bronze', 25: 'silver', 5: 'gold' }),
   }),
@@ -34,12 +35,27 @@ fakerE.iteration(
 
 /*
  * Will return an object with anywhere between 300 to 2000 key/value pairs.
- * These might look like the following:
+ * These might look something like the following:
  *
  * { 
- *   4aa71604-2d35-4de2-8c86-9b6791bbc90a: { score: 667, league: 'bronze' },
- *   e572ca5e-c857-493b-a212-95e3ec812b2c: { score: 446, league: 'silver' },
- *   82b46b13-2e0e-4572-a2cd-ded291cdb3f4: { score: 915, league: 'bronze' },
+ *   4aa71604-2d35-4de2-8c86-9b6791bbc90a: { 
+ *    badges: ['orange', 'green', 'red']
+ *    score: 667, 
+ *    league: 'bronze' 
+ *  },
+ * 
+ *  e572ca5e-c857-493b-a212-95e3ec812b2c: {
+ *    badges: [],
+ *    score: 446,
+ *    league: 'silver' 
+ *  },
+ * 
+ *   82b46b13-2e0e-4572-a2cd-ded291cdb3f4: { 
+ *    badges: ['red']
+ *    score: 915, 
+ *    league: 'bronze'
+ *  },
+ * 
  *   ...
  * }
  * 
@@ -102,11 +118,11 @@ fakerE.iteration<number>(10, Math.random);
 
 ## 🔢 `fakerE.frequency()`
 
-```ts
-<T extends any>(ratios: number | Record<T, number> | Map<T, number>) => T
-```
+**Creates an array/object who's length is equal, or ranging between, predefined amounts.**
 
-**Returns a random value from a list at a pre-defined frequency. Cam be used as follows:**
+```ts
+<T extends any>(ratios: number | Record<T, number>) => T
+```
 
 - To return a boolean value:
 
@@ -144,36 +160,18 @@ fakerE.frequency({ 'A B C': 10, '': 20, 'C A B': 20, 'C B A': 20 })
  */
 ```
 
-- To return a value from a pre-defined list of arrays/objects.
-  
-  _Note that an error will be thrown if all frequencies do not add up to 100._
-
-```js
-const FIRST_OBJ = { id: 'a49a4c75-823a-4c97-861e-7e8517affa08', permissions: 'contributor' });
-const SECOND_OBJ = { id: '0a154718-dfd5-4cc7-99d2-9e1ba3cfbe48', permissions: 'editor' });
-const FIRST_ARRAY = ['0a154718-dfd5-4cc7-99d2-9e1ba3cfbe48', 'contributor'];
-const SECOND_ARRAY = ['0a154718-dfd5-4cc7-99d2-9e1ba3cfbe48', 'admin']; 
-
-fakerE.frequency(new Map([FIRST_OBJ, 10], [SECOND_OBJ, 20], [FIRST_ARRAY, 20], [SECOND_ARRAY, 50]]))
-
-/*
- * - Has a 10% chance to return `FIRST_OBJ`.
- * - Has a 20% chance to return `SECOND_OBJ` or `FIRST_ARRAY`.
- * - Has a 50% chance to return 'SECOND_ARRAY'.
- */
-```
-
 ---
 
-## 🔁 `fakerE.iteration()`
+## 🔁 `fakerE.array()`
+
+**Returns an array created from pre-defined values.**
 
 ```ts
 <T extends any>(
-  length: number | [number, number] | any[]
-  value: any
-) => any[] | Record<any, any>
+  length: number | [number, number],
+  value?: T,
+) => T[] 
 ```
-
 
 - To create an array with a length of 5:
 
@@ -218,7 +216,17 @@ fakerE.iteration(3, Math.random)
  */
 ```
 
-- To populate an array with object via a callback:
+- To extract from an existing array add `true` as the third argument.
+
+```js
+fakerE.iteration([2, 4], ['a', 'b', 'c', 'd', 'e'], true) 
+
+/*
+ *  Might something like `['c', 'e']` or [`'d', 'a', 'e', 'b']`
+ */
+```
+
+- To populate an array with objects via a callback:
 
 ```js
 fakerE.iteration(
@@ -229,7 +237,7 @@ fakerE.iteration(
 )
 
 /*
- *  Might something like:
+ *  Might look something like:
  *
  * [ 
  *  { score: 667 },
@@ -240,30 +248,72 @@ fakerE.iteration(
  */
 ```
 
-- To populate an object with the following keys and by means of the following callback:
+---
+
+## 🔀 `fakerE.object()`
+
+**Returns an array created from pre-defined values.**
+
+```ts
+<K extends any, T extends any>(
+  length: K[],
+  value?: T | ((key?: K) => T),
+) => Record<K, T> 
+```
+
+- To create an object from `['a', 'b', 'c', 'd', 'e']` keys:
 
 ```js
-const IDS = [
-  '4aa71604-2d35-4de2-8c86-9b6791bbc90a', 
-  'e572ca5e-c857-493b-a212-95e3ec812b2c', 
-  '82b46b13-2e0e-4572-a2cd-ded291cdb3f4'
-]
-
-fakerE.iteration(
-  IDS, 
-  () => ({ 
-    score: Math.round(Math.random() * 1000), 
-  }),
-)
+fakerE.object(['a', 'b', 'c', 'd', 'e']) 
 
 /*
- *  Might something like:
+ * Will be:
  *
- * { 
- *   4aa71604-2d35-4de2-8c86-9b6791bbc90a: { score: 667 },
- *   e572ca5e-c857-493b-a212-95e3ec812b2c: { score: 446 },
- *   82b46b13-2e0e-4572-a2cd-ded291cdb3f4: { score: 915 },
+ * {
+ *    a: undefined,
+ *    b: undefined,
+ *    c: undefined,
+ *    d: undefined,
+ *    e: undefined,
  * }
- * 
+ *
+ */
+```
+
+- To create an object from the `[1, 2, 3, 4, 5]` keys and `'abc'` as a value:
+
+```js
+fakerE.object([1, 2, 3, 4, 5], 'abc') 
+
+/*
+ * Will be:
+ *
+ * {
+ *    1: 'abc',
+ *    2: 'abc',
+ *    3: 'abc',
+ *    4: 'abc',
+ *    5: 'abc',
+ * }
+ *
+ */
+```
+
+- To create an object from `[1, 2, 3, 4, 5]` and use a callback to create a value:
+
+```js
+fakerE.object([1, 2, 3, 4, 5], () => faker.random.number(100)) 
+
+/*
+ * Might look something like this:
+ *
+ * {
+ *    1: 63,
+ *    2: 9,
+ *    3: 71,
+ *    4: 3,
+ *    5: 51,
+ * }
+ *
  */
 ```

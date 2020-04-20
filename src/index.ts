@@ -4,7 +4,6 @@
 
 import faker from 'faker';
 
-
 /*
  * Module exports 
  */
@@ -49,20 +48,87 @@ export const frequency = <T extends any>(ratios: number | Record<T, number>): bo
 }
 
 /**
- * Returns a random value from a list at a pre-defined frequency
+ * Returns an array created from pre-defined values.
  */
-export const iteration = <T extends any>(
-  length: number | [number, number] | any[],
-  value: any
-): any[] | Record<any, any> => {
+export const array = <T extends any>(
+  length: number | [number, number],
+  value?: T | (() => T) | T[],
+  extract?: boolean
+): T[] => {
 
+  const valueIsFn = typeof value === 'function';
+  const finalLength = !Array.isArray(length) ? length : faker.random.number({ min: length[0], max: length[1] });
 
-  if (isNumber) {
-    return faker.random.number =< ratios ? ;
+  if (!valueIsFn && !extract) {
+    const valueAsValue = value as T;
+    return new Array(finalLength).fill(valueAsValue === null ? null : valueAsValue ?? undefined) as T[];
   }
+
+  if (valueIsFn && !extract) {
+    const valueAsFn = value as () => T;
+
+    return new Array(finalLength)
+      .fill(undefined).map(valueAsFn) as T[];
+  }
+
+  if (!Array.isArray(value)) {
+    throw new Error('If extracting from an existing array value needs to be the source array')
+  }
+
+  const valueAsArray = value as T[];
+
+  if (finalLength > valueAsArray.length) {
+    throw new Error('Specified range can not have more items than source array')
+  }
+
+  const lengthDifference = valueAsArray.length - finalLength;
+
+  return new Array(lengthDifference).fill(undefined).reduce(
+    (result) => {
+      const index = faker.random.number({ min: 0, max: result.length - 1 });
+
+      return [
+        ...result.slice(0, index),
+        ...result.slice(index + 1),
+      ]
+    },
+    valueAsArray as T[]
+  )
+}
+
+/**
+ * Returns an object created from pre-defined values.
+ */
+export const object = <K extends any, T extends any, >(
+  length: K[],
+  value?: T | ((key?: K) => T),
+): Record<K, T> => {
+  const valueIsFn = typeof value === 'function';
+  const lenghtAsArray = length as K[];
+
+  if (!valueIsFn) {
+    return lenghtAsArray.reduce((result, key) => {
+      return {
+        ...result,
+        [key as K]: value as T,
+      } 
+    },
+    {} as Record<K, T>) as Record<K, T>
+  }
+
+  const valueAsFn = value as (key: K) => T;
+
+  return lenghtAsArray.reduce((result, key) => {
+    return {
+      ...result,
+      [key as K]: valueAsFn(key) as T,
+    }
+  },
+  {} as Record<K, T>) as Record<K, T>
 }
 
 export default {
   frequency,
-  iteration,
+  array,
+  object,
 }
