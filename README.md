@@ -45,8 +45,8 @@ fakerE.iteration(
 
 **Usage:**
 
-- 🔢 [`fakerE.frequency()`](#fakerefrequency)
-- 🔁 [`fakerE.iteration()`](#fakereiteration)
+- 🔢 [`fakerE.frequency()`](#-fakerefrequency)
+- 🔁 [`fakerE.iteration()`](#-fakereiteration)
 
 **Examples:**
 
