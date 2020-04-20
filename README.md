@@ -8,7 +8,7 @@
 
 ## Why Faker Enhanced?
 
-- You want to mock a random value, but have it more/less likely to be a specific value.
+- You want to mock a random value from a list, but you want some values to be returned more fequently than others.
 - You want to create arrays/objects of randomized lengths.
 
 For example you might want to extend faker to mock something like the following:
