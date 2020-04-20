@@ -11,7 +11,7 @@
 - You want to mock a random value from a list, but you want some values to be returned more fequently than others.
 - You want to create arrays/objects of randomized lengths.
 
-For example you might want to extend faker to mock something like the following:
+For example you might want to extend faker to mock something like follows:
 
 ```js
 faker.seed(1);
