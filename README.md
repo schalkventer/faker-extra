@@ -95,6 +95,8 @@ fakerE.frequency<string>({ a: 10, b: 10, c: 90 });
 fakerE.iteration<number>(10, Math.random);
 ```
 
+---
+
 ## **API**
 
 ### `fakerE.frequency()`
