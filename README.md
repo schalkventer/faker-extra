@@ -4,7 +4,7 @@
 
 **Adds additional functionality and configurations options to base Faker.js library**
 
-![](assets/es-logo.png)
+![](https://raw.githubusercontent.com/schalkventer/faker-enhanced/master/assets/es-logo.png)
 
 ## Why Faker Enhanced?
 
@@ -45,8 +45,8 @@ fakerE.iteration(
 
 **Usage:**
 
-- [`fakerE.frequency()`](#)
-- [`fakerE.iteration()`](#)
+- [`fakerE.frequency()`](#fakerefrequency)
+- [`fakerE.iteration()`](#fakereiteration)
 
 **Examples:**
 
