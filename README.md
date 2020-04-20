@@ -58,15 +58,15 @@ fakerE.iteration(
 
 ## Installing
 
-**Run via terminal/command-line in root of project.**
+1. **Run via terminal/command-line in root of project.**
 
-_Note: Packages should be imported as a development dependencies since you want to avoid using mock values in your production output._
+   _Note: Packages should be imported as a development dependencies since you want to avoid using mock values in your production output._
 
-`npm install --save-dev faker faker-enhanced`
+   `npm install --save-dev faker faker-enhanced`
 
-**Then import as follows:**
-
-_Note: that you can also descructure only the required helpers from import if you want._
+2. **Then import as follows:**
+   
+   _Note: that you can also descructure only the required helpers from import if you want._
 
 ##### ES Modules
 
