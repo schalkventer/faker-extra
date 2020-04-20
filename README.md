@@ -60,7 +60,7 @@ fakerE.iteration(
 
 **Run via terminal/command-line in root of project.**
 
-_Note: Packages should be imported as a development dependency since you avoid using mock values in your production output._
+_Note: Packages should be imported as a development dependencies since you want to avoid using mock values in your production output._
 
 `npm install --save-dev faker faker-enhanced`
 
