@@ -1,13 +1,14 @@
-# 🎠 Faker Extra 
+# 🎠 Faker.js Enhanced 
 
 [![](https://travis-ci.org/schalkventer/react-html-connector.svg?branch=master)](https://travis-ci.org/schalkventer/react-html-connect) [![](https://img.shields.io/npm/dm/react-html-connector.svg)](https://www.npmjs.com/package/react-html-connector) [![](https://img.shields.io/badge/stability-experimental-orange.svg)](#package-state)
 
-**Additional helper functions extending base FakerJS functionality**
+**Adds additional functionality and configurations options to base Faker.js library**
 
-## Table of Contents
+![](assets/es-logo.png)
 
-- [Table of Contents](#table-of-contents)
-- [Getting started](#getting-started)
+---
+
+- [**Getting started**](#getting-started)
   - [Via HTML scripts](#via-html-scripts)
   - [Via JavaScript modules](#via-javascript-modules)
     - [1. Install](#1-install)
@@ -15,7 +16,7 @@
       - [ES Modules](#es-modules)
       - [CommonJS](#commonjs)
       - [TypeScript](#typescript)
-- [API](#api)
+- [**API**](#api)
   - [`frequency()`](#frequency)
     - [Examples](#examples)
       - [Random boolean](#random-boolean)
@@ -29,10 +30,10 @@
       - [Array length between 3 - 5 from value callback](#array-length-between-3---5-from-value-callback)
       - [Array length between 3 - 5 from object callback](#array-length-between-3---5-from-object-callback)
       - [Array length between 3 - 5 from frequency callback](#array-length-between-3---5-from-frequency-callback)
-- [FAQ](#faq)
-  - [Does `faker-extra` honor any existing `faker.seed()` configuration?](#does-faker-extra-honor-any-existing-fakerseed-configuration)
+- [**FAQ**](#faq)
+  - [Does `faker-enhanced` honor any existing `faker.seed()` configuration?](#does-faker-enhanced-honor-any-existing-fakerseed-configuration)
 
-## Getting started
+## **Getting started**
 
 ### Via HTML scripts
 
@@ -45,8 +46,8 @@
   </head>
   <body>
     <script defer>
-      fakerExtra.frequency({ a: 10, b: 10, c: 90 });
-      fakerExtra.randomIteration(Math.random, 5, 20);
+      fakerE.frequency({ a: 10, b: 10, c: 90 });
+      fakerE.randomIteration(Math.random, 5, 20);g
     </script>
   </body>
 <html>
@@ -60,28 +61,28 @@ Run via terminal/command-line in root of project.
 
 _Note: Packages should be imported as a development dependency since you avoid using mock values in your production output._
 
-- **NPM:** `npm install --save-dev faker faker-extra`
+- **NPM:** `npm install --save-dev faker faker-enhanced`
    
-- **Yarn:** `yarn add -D faker faker-extra`
+- **Yarn:** `yarn add -D faker faker-enhanced`
 
 #### 2. Usage
 
 ##### ES Modules
 
 ```js
-import { frequency, randomIteration } from 'faker-extra';
+import { frequency, randomIteration } from 'faker-enhanced';
 
-fakerExtra.frequency({ a: 10, b: 10, c: 90 });
-fakerExtra.randomIteration(Math.random, 5, 20);
+fakerE.frequency({ a: 10, b: 10, c: 90 });
+fakerE.randomIteration(Math.random, 5, 20);
 ```
 
 ##### CommonJS
 
 ```js
-const { frequency, randomIteration } = require('faker-extra');
+const { frequency, randomIteration } = require('faker-enhanced');
 
-fakerExtra.frequency<string>({ a: 10, b: 10, c: 90 });
-fakerExtra.randomIteration<number>(Math.random, 5, 20);
+fakerE.frequency<string>({ a: 10, b: 10, c: 90 });
+fakerE.randomIteration<number>(Math.random, 5, 20);
 ```
 
 ##### TypeScript
@@ -89,11 +90,11 @@ fakerExtra.randomIteration<number>(Math.random, 5, 20);
 ```ts
 import { frequency, randomIteration } from 'faker-extra';
 
-fakerExtra.frequency<string>({ a: 10, b: 10, c: 90 });
-fakerExtra.randomIteration<number>(Math.random, 5, 20);
+fakerE.frequency<string>({ a: 10, b: 10, c: 90 });
+fakerE.randomIteration<number>(Math.random, 5, 20);
 ```
 
-## API
+## **API**
 
 ### `frequency()`
 
@@ -231,10 +232,10 @@ randomIteration(() => ({ number: Math.random() }))
 randomIteration(() => frequency({ a: 25, b: 25, c: 50 })))
 ```
 
-## FAQ
+## **FAQ**
 
-### Does `faker-extra` honor any existing `faker.seed()` configuration?
+### Does `faker-enhanced` honor any existing `faker.seed()` configuration?
 
 _**Yes.**_
 
-_Faker Extra honours the behaviour of the `Faker.seed()` configuration as outlined in the [original Python faker documentation](https://faker.readthedocs.io/en/master/#seeding-the-generator) (note that FakerJS is a port of the former library)._
+_Faker Enhanced honours the behaviour of the `Faker.seed()` configuration as outlined in the [original Python faker documentation](https://faker.readthedocs.io/en/master/#seeding-the-generator) (note that FakerJS is a port of the former library)._
