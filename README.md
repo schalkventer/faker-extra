@@ -45,8 +45,8 @@ fakerE.iteration(
 
 **Usage:**
 
-- [`fakerE.frequency()`](#fakerefrequency)
-- [`fakerE.iteration()`](#fakereiteration)
+- 🔢 [`fakerE.frequency()`](#fakerefrequency)
+- 🔁 [`fakerE.iteration()`](#fakereiteration)
 
 **Examples:**
 
@@ -56,7 +56,7 @@ fakerE.iteration(
 
 ---
 
-## Installing
+## 💾 Installing
 
 1. **Run via terminal/command-line in root of project.**
 
@@ -97,7 +97,7 @@ fakerE.iteration<number>(10, Math.random);
 
 ---
 
-## `fakerE.frequency()`
+## 🔢 `fakerE.frequency()`
 
 ```ts
 <T extends any>(ratios: number | Record<T, number> | Map<T, number>) => T
@@ -162,7 +162,7 @@ fakerE.frequency(new Map([FIRST_OBJ, 10], [SECOND_OBJ, 20], [FIRST_ARRAY, 20], [
 
 ---
 
-## `fakerE.iteration()`
+## 🔁 `fakerE.iteration()`
 
 ```ts
 <T extends any>(
