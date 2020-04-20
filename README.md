@@ -30,6 +30,8 @@
       - [Array length between 3 - 5 from value callback](#array-length-between-3---5-from-value-callback)
       - [Array length between 3 - 5 from object callback](#array-length-between-3---5-from-object-callback)
       - [Array length between 3 - 5 from frequency callback](#array-length-between-3---5-from-frequency-callback)
+      - [Object length between 3 - 5 with calculated keys](#object-length-between-3---5-with-calculated-keys)
+      - [Object length between 3 - 5 with random keys](#object-length-between-3---5-with-random-keys)
 - [**FAQ**](#faq)
   - [Does `faker-enhanced` honor any existing `faker.seed()` configuration?](#does-faker-enhanced-honor-any-existing-fakerseed-configuration)
 
@@ -72,8 +74,8 @@ _Note: Packages should be imported as a development dependency since you avoid u
 ```js
 import { frequency, randomIteration } from 'faker-enhanced';
 
-fakerE.frequency({ a: 10, b: 10, c: 90 });
-fakerE.randomIteration(Math.random, 5, 20);
+frequency({ a: 10, b: 10, c: 90 });
+randomIteration(Math.random, 5, 20);
 ```
 
 ##### CommonJS
@@ -81,8 +83,8 @@ fakerE.randomIteration(Math.random, 5, 20);
 ```js
 const { frequency, randomIteration } = require('faker-enhanced');
 
-fakerE.frequency<string>({ a: 10, b: 10, c: 90 });
-fakerE.randomIteration<number>(Math.random, 5, 20);
+frequency({ a: 10, b: 10, c: 90 });
+randomIteration(Math.random, 5, 20);
 ```
 
 ##### TypeScript
@@ -90,8 +92,8 @@ fakerE.randomIteration<number>(Math.random, 5, 20);
 ```ts
 import { frequency, randomIteration } from 'faker-extra';
 
-fakerE.frequency<string>({ a: 10, b: 10, c: 90 });
-fakerE.randomIteration<number>(Math.random, 5, 20);
+frequency<string>({ a: 10, b: 10, c: 90 });
+randomIteration<number>(Math.random, 5, 20);
 ```
 
 ## **API**
@@ -152,7 +154,7 @@ frequency({
 
 ### `randomIteration()`
 ```ts
-(percentages: number | any[] | Record<number, any>) => any
+(values:any[], range?: number | [number, number], createObjKey?: (value, index) => void ) => any
 ```
 
 #### Examples
@@ -193,7 +195,7 @@ randomIteration['a', 'b', 'c', 'd', 'e'], 5)
  * @example  ['b', 'c', 'a', 'e']
  * @example  ['c', 'e', 'e', 'b', 'd']
  */
-randomIteration['a', 'b', 'c', 'd', 'e'], 3, 5)
+randomIteration['a', 'b', 'c', 'd', 'e'], [3, 5])
 ```
 
 ##### Array length between 3 - 5 from value callback
@@ -205,7 +207,7 @@ randomIteration['a', 'b', 'c', 'd', 'e'], 3, 5)
  * @example [0.3667866123486143, 0.44642296430964445, 0.915051909777594]
  * @example [ 0.6168982362162574, 0.33763440760609464, 0.5117408531603971, 0.8418701365530443, 0, 15739907213241544 ]
  */
-randomIteration(Math.random)
+randomIteration(Math.random, [3, 5])
 ```
 
 ##### Array length between 3 - 5 from object callback
@@ -217,7 +219,7 @@ randomIteration(Math.random)
  * @example [{ number: 0.3667866123486143 }, { number: 0.44642296430964445 }, { number: 0.915051909777594 }]
  * @example [{ number: 0.6168982362162574 }, { number: 0.33763440760609464 }, { number: 0.5117408531603971 }, { number: 0.8418701365530443 }, { number: 0.15739907213241544 }]
  */
-randomIteration(() => ({ number: Math.random() }))
+randomIteration(() => ({ number: Math.random() }), [3, 5])
 ```
 
 ##### Array length between 3 - 5 from frequency callback
@@ -229,7 +231,49 @@ randomIteration(() => ({ number: Math.random() }))
  * @example ['b', 'c', 'c']
  * @example ['a', 'c', 'b', 'a', 'b']
  */
-randomIteration(() => frequency({ a: 25, b: 25, c: 50 })))
+randomIteration(() => frequency({ a: 25, b: 25, c: 50 })), [3, 5])
+```
+
+##### Object length between 3 - 5 with calculated keys
+
+```js
+/**
+ * Object of `frequency()` results with length between 3 and 5. Possible results:
+ * 
+ * @example [{ b1: 'b', c2: 'c', c3: 'c' }]
+ * @example [{ a1: 'a', b2: 'c', c3: 'b', a4: 'a', b5: 'b']
+ */
+randomIteration(() => frequency({ a: 25, b: 25, c: 50 }), [3, 5],(value, index) => `${value}${index}`))
+```
+
+##### Object length between 3 - 5 with random keys
+
+```js
+/**
+ * Object of `frequency()` results with length between 3 and 5. Possible results:
+ * 
+ * @example [{ b1: 'b', c2: 'c', c3: 'c' }]
+ * @example [{ a1: 'a', b2: 'c', c3: 'b', a4: 'a', b5: 'b']
+ */
+randomIteration({ a: 25, b: 25, c: 50 }, [3, 5],(value, index) => `${value}${index}`))
+```
+
+```js
+/**
+ * Object of `frequency()` results with length between 3 and 5. Possible results:
+ * 
+ * @example { user_40173856: { permissions: 'user' }, user_55489589: { permissions: 'moderator' }, user_29837282: { permissions: 'user' } }
+ * @example { user_69698530: { permissions: 'admin' }, user_40305335: { permissions: 'user' }, user_69118445: { permissions: 'user' }, user_95354785: { permissions: 'moderator' }, user_24859541: { permissions: 'user' }
+ */
+randomIteration(
+  {
+    user: 70,
+    moderator: 25,
+    admin: 5,
+  },
+  [200, 600],
+  () => `user_${Math.round(Math.random() * 100000000)}`,
+)
 ```
 
 ## **FAQ**
