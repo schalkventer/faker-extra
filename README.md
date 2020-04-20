@@ -6,38 +6,63 @@
 
 ![](assets/es-logo.png)
 
+## Why Faker Enhanced?
+
+- You want to mock a random value, but have it more/less likely to be a specific value.
+- You want to create arrays/objects of randomized lengths.
+
+For example you might want to extend faker to mock something like the following:
+
+```js
+faker.seed(1);
+
+const uniqueIds = fakerE.iteration(
+  [300, 2000], 
+  () => Math.floor(Math.random() * 1000000000)
+);
+
+fakerE.iteration(
+  uniqueIds, 
+  () => ({ 
+    score: Math.round(Math.random() * 1000),
+    league: fakerE.frequency({ 70: 'bronze', 25: 'silver', 5: 'gold' }),
+  }),
+)
+
+/*
+ * Will return an object with anywhere between 300 to 2000 key/value pairs.
+ * These might look like the following:
+ *
+ * { 
+ *   4aa71604-2d35-4de2-8c86-9b6791bbc90a: { score: 667, league: 'bronze' },
+ *   e572ca5e-c857-493b-a212-95e3ec812b2c: { score: 446, league: 'silver' },
+ *   82b46b13-2e0e-4572-a2cd-ded291cdb3f4: { score: 915, league: 'bronze' },
+ *   ...
+ * }
+ * 
+ */
+```
+
+
+**Usage:**
+
+- [`fakerE.frequency()`](#)
+- [`fakerE.iteration()`](#)
+
+**Examples:**
+
+- Creating an array containing mock users with different permission levels _(coming soon)_
+- Using with Jest _(coming soon)_
+- Using with Mocha _(coming soon)_
+
 ---
 
-- [**Getting started**](#getting-started)
-  - [Via HTML scripts](#via-html-scripts)
-  - [Via JavaScript modules](#via-javascript-modules)
-    - [1. Install](#1-install)
-    - [2. Usage](#2-usage)
-      - [ES Modules](#es-modules)
-      - [CommonJS](#commonjs)
-      - [TypeScript](#typescript)
-- [**API**](#api)
-  - [`frequency()`](#frequency)
-    - [Examples](#examples)
-      - [Random boolean](#random-boolean)
-      - [Random values](#random-values)
-      - [Random values with custom frequencies](#random-values-with-custom-frequencies)
-  - [`randomIteration()`](#randomiteration)
-    - [Examples](#examples-1)
-      - [Array length between 0 - 10 (default) from values](#array-length-between-0---10-default-from-values)
-      - [Array length between 0 - 5 from values](#array-length-between-0---5-from-values)
-      - [Array length between 3 - 5 from values](#array-length-between-3---5-from-values)
-      - [Array length between 3 - 5 from value callback](#array-length-between-3---5-from-value-callback)
-      - [Array length between 3 - 5 from object callback](#array-length-between-3---5-from-object-callback)
-      - [Array length between 3 - 5 from frequency callback](#array-length-between-3---5-from-frequency-callback)
-      - [Object length between 3 - 5 with calculated keys](#object-length-between-3---5-with-calculated-keys)
-      - [Object length between 3 - 5 with random keys](#object-length-between-3---5-with-random-keys)
-- [**FAQ**](#faq)
-  - [Does `faker-enhanced` honor any existing `faker.seed()` configuration?](#does-faker-enhanced-honor-any-existing-fakerseed-configuration)
+## Installing
 
-## **Getting started**
+  - [HTML scripts](#via-html-scripts)
+  - [JavaScript module](#via-javascript-modules)
 
-### Via HTML scripts
+### HTML scripts
 
 ```html
 <html>
@@ -49,17 +74,15 @@
   <body>
     <script defer>
       fakerE.frequency({ a: 10, b: 10, c: 90 });
-      fakerE.randomIteration(Math.random, 5, 20);g
+      fakerE.iteration(Math.random, 5, 20);g
     </script>
   </body>
 <html>
 ```
 
-### Via JavaScript modules
+### JavaScript module
 
-#### 1. Install
-   
-Run via terminal/command-line in root of project.
+**Run via terminal/command-line in root of project.**
 
 _Note: Packages should be imported as a development dependency since you avoid using mock values in your production output._
 
@@ -67,219 +90,193 @@ _Note: Packages should be imported as a development dependency since you avoid u
    
 - **Yarn:** `yarn add -D faker faker-enhanced`
 
-#### 2. Usage
+**Then import as follows:**
+
+_Note that you can also descructure only the required helpers from import if you want._
 
 ##### ES Modules
 
 ```js
-import { frequency, randomIteration } from 'faker-enhanced';
+import fakerE from 'faker-enhanced';
 
-frequency({ a: 10, b: 10, c: 90 });
-randomIteration(Math.random, 5, 20);
+fakerE.frequency({ a: 10, b: 10, c: 90 });
+fakerE.array(Math.random, 5, 20);
 ```
 
 ##### CommonJS
 
 ```js
-const { frequency, randomIteration } = require('faker-enhanced');
+const fakerE = require('faker-enhanced');
 
-frequency({ a: 10, b: 10, c: 90 });
-randomIteration(Math.random, 5, 20);
+fakerE.frequency({ a: 10, b: 10, c: 90 });
+fakerE.array(Math.random, 5, 20);
 ```
 
 ##### TypeScript
 
 ```ts
-import { frequency, randomIteration } from 'faker-extra';
+import fakerE from 'faker-enhanced';
 
-frequency<string>({ a: 10, b: 10, c: 90 });
-randomIteration<number>(Math.random, 5, 20);
+fakerE.frequency<string>({ a: 10, b: 10, c: 90 });
+fakerE.array<number>(Math.random, 5, 20);
 ```
 
 ## **API**
 
-### `frequency()`
+### `fakerE.frequency()`
 
 ```ts
-(percentages: number | Record<number, any>, values?: [any, any]) => any
+<T extends any>(ratios: number | Record<T, number> | Map<T, number>) => T
 ```
 
-#### Examples
+**Returns a random value from a list at a pre-defined frequency. Cam be used as follows:**
 
-##### Random boolean
+- To return a boolean value:
 
 ```js
-/**
- * Returns random boolean value
- * 
- * 70% chance to be true
- * 30% change to be false
+fakerE.frequency(70) 
+
+/*
+ * - Has a 70% chance to return `true`
+ * - Has a 30% chance to return `false`
  */
-frequency(70)
 ```
 
-##### Random values
+- To return a value from a pre-defined list.
 
 ```js
-/**
- * Returns random value from supplied array
- * 
- * 70% change to be 'a'
- * 30% change to be 'b'
+fakerE.frequency({ a: 70, b: 30 })
+
+/*
+ * - Has a 70% chance to return "a".
+ * - Has a 30% chance to return "c".
  */
-frequency(70, ['a', 'b'])
 ```
 
-##### Random values with custom frequencies
+- To return a value from a pre-defined list that has more than 2 items.
+  
+  _Note that an error will be thrown if all frequencies do not add up to 100._
 
 ```js
-/**
- * Returns random key from object, with the value-pair as the frequency. 
- * Note that an error will be thrown if frequencies do not add up to 100.
- * 
- * 10% change to be 'a'
- * 10% change to be 'b'
- * 20% chance to be 'c'
- * 20% change to be 'd'
- * 40% change to be 'e'
+fakerE.frequency({ 'A B C': 10, '': 20, 'C A B': 20, 'C B A': 20 })
+
+/*
+ * - Has a 10% chance to return "A B C".
+ * - Has a 20% chance to return "A C B" or "C A B".
+ * - Has a 50% chance to return "C B A".
  */
-frequency({
-  a: 10,
-  b: 10,
-  c: 20,
-  d: 20,
-  e: 40,
-})
 ```
 
-### `randomIteration()`
-```ts
-(values:any[], range?: number | [number, number], createObjKey?: (value, index) => void ) => any
-```
-
-#### Examples
-
-##### Array length between 0 - 10 (default) from values
+- To return a value from a pre-defined list of arrays/objects.
+  
+  _Note that an error will be thrown if all frequencies do not add up to 100._
 
 ```js
-/**
- * Array of supplied values with length between 0 and 10.
- * 
- * @example []
- * @example ['d', 'a', 'e', 'c', 'a']
- * @example ['c', 'e', 'e', 'b', 'd', 'c', 'b', 'c', 'a', 'e']
+const FIRST_OBJ = { id: 'a49a4c75-823a-4c97-861e-7e8517affa08', permissions: 'contributor' });
+const SECOND_OBJ = { id: '0a154718-dfd5-4cc7-99d2-9e1ba3cfbe48', permissions: 'editor' });
+const FIRST_ARRAY = ['0a154718-dfd5-4cc7-99d2-9e1ba3cfbe48', 'contributor'];
+const SECOND_ARRAY = ['0a154718-dfd5-4cc7-99d2-9e1ba3cfbe48', 'admin']; 
+
+fakerE.frequency(new Map([FIRST_OBJ, 10], [SECOND_OBJ, 20], [FIRST_ARRAY, 20], [SECOND_ARRAY, 50]]))
+
+/*
+ * - Has a 10% chance to return `FIRST_OBJ`.
+ * - Has a 20% chance to return `SECOND_OBJ` or `FIRST_ARRAY`.
+ * - Has a 50% chance to return 'SECOND_ARRAY'.
  */
-randomIteration['a', 'b', 'c', 'd', 'e'])
 ```
 
-##### Array length between 0 - 5 from values
+### `fakerE.iteration()`
+
+- To create an array with a length of 5:
 
 ```js
-/**
- * Array of supplied values with length between 0 and 5.
- * 
- * @example  []
- * @example  ['d', 'a']
- * @example  ['c', 'e', 'e', 'b', 'd']
+fakerE.iteration(5) 
+
+/*
+ * Will be `[undefined, undefined, undefined, undefined, undefined]`.
  */
-randomIteration['a', 'b', 'c', 'd', 'e'], 5)
 ```
 
-##### Array length between 3 - 5 from values
+- To create an array with a random length between 3 and 6:
 
 ```js
-/**
- * Array of supplied values with length between 3 and 5.
- * 
- * @example  ['d', 'a'', 'a']
- * @example  ['b', 'c', 'a', 'e']
- * @example  ['c', 'e', 'e', 'b', 'd']
+fakerE.iteration([3, 6]) 
+
+/*
+ * - Has a 25% chance to be `[undefined, undefined, undefined]`
+ * - Has a 25% chance to be `[undefined, undefined, undefined, undefined]`.
+ * - Has a 25% chance to be `[undefined, undefined, undefined, undefined, undefined]`.
+ * - Has a 25% chance to be `[undefined, undefined, undefined, undefined, undefined, undefined]`.
  */
-randomIteration['a', 'b', 'c', 'd', 'e'], [3, 5])
 ```
 
-##### Array length between 3 - 5 from value callback
+- To populate it with a value:
 
 ```js
-/**
- * Array of `Math.random()` result with length between 3 and 5.
- * 
- * @example [0.3667866123486143, 0.44642296430964445, 0.915051909777594]
- * @example [ 0.6168982362162574, 0.33763440760609464, 0.5117408531603971, 0.8418701365530443, 0, 15739907213241544 ]
+fakerE.iteration(5, 'abc') 
+
+/*
+ * Will be `["abc", "abc", "abc", "abc", "abc"]`.
  */
-randomIteration(Math.random, [3, 5])
 ```
 
-##### Array length between 3 - 5 from object callback
+- To populate it with by means of a callback:
 
 ```js
-/**
- * Array of `Math.random()` results with length between 3 and 5. Possible results:
- * 
- * @example [{ number: 0.3667866123486143 }, { number: 0.44642296430964445 }, { number: 0.915051909777594 }]
- * @example [{ number: 0.6168982362162574 }, { number: 0.33763440760609464 }, { number: 0.5117408531603971 }, { number: 0.8418701365530443 }, { number: 0.15739907213241544 }]
+fakerE.iteration(3, Math.random) 
+
+/*
+ *  Might something like `[0.3667866123486143, 0.44642296430964445, 0.915051909777594]`
  */
-randomIteration(() => ({ number: Math.random() }), [3, 5])
 ```
 
-##### Array length between 3 - 5 from frequency callback
+- To populate an array with object via a callback:
 
 ```js
-/**
- * Array of `frequency()` results with length between 3 and 5. Possible results:
- * 
- * @example ['b', 'c', 'c']
- * @example ['a', 'c', 'b', 'a', 'b']
- */
-randomIteration(() => frequency({ a: 25, b: 25, c: 50 })), [3, 5])
-```
-
-##### Object length between 3 - 5 with calculated keys
-
-```js
-/**
- * Object of `frequency()` results with length between 3 and 5. Possible results:
- * 
- * @example [{ b1: 'b', c2: 'c', c3: 'c' }]
- * @example [{ a1: 'a', b2: 'c', c3: 'b', a4: 'a', b5: 'b']
- */
-randomIteration(() => frequency({ a: 25, b: 25, c: 50 }), [3, 5],(value, index) => `${value}${index}`))
-```
-
-##### Object length between 3 - 5 with random keys
-
-```js
-/**
- * Object of `frequency()` results with length between 3 and 5. Possible results:
- * 
- * @example [{ b1: 'b', c2: 'c', c3: 'c' }]
- * @example [{ a1: 'a', b2: 'c', c3: 'b', a4: 'a', b5: 'b']
- */
-randomIteration({ a: 25, b: 25, c: 50 }, [3, 5],(value, index) => `${value}${index}`))
-```
-
-```js
-/**
- * Object of `frequency()` results with length between 3 and 5. Possible results:
- * 
- * @example { user_40173856: { permissions: 'user' }, user_55489589: { permissions: 'moderator' }, user_29837282: { permissions: 'user' } }
- * @example { user_69698530: { permissions: 'admin' }, user_40305335: { permissions: 'user' }, user_69118445: { permissions: 'user' }, user_95354785: { permissions: 'moderator' }, user_24859541: { permissions: 'user' }
- */
-randomIteration(
-  {
-    user: 70,
-    moderator: 25,
-    admin: 5,
-  },
-  [200, 600],
-  () => `user_${Math.round(Math.random() * 100000000)}`,
+fakerE.iteration(
+  3, 
+  () => ({
+    score: Math.round(Math.random() * 1000), 
+  }),
 )
+
+/*
+ *  Might something like:
+ *
+ * [ 
+ *  { score: 667 },
+ *  { score: 446 },
+ *  { score: 915 },
+ * ]
+ *
+ */
 ```
 
-## **FAQ**
+- To populate an object with the following keys and by means of the following callback:
 
-### Does `faker-enhanced` honor any existing `faker.seed()` configuration?
+```js
+const IDS = [
+  '4aa71604-2d35-4de2-8c86-9b6791bbc90a', 
+  'e572ca5e-c857-493b-a212-95e3ec812b2c', 
+  '82b46b13-2e0e-4572-a2cd-ded291cdb3f4'
+]
 
-_**Yes.**_
+fakerE.iteration(
+  IDS, 
+  () => ({ 
+    score: Math.round(Math.random() * 1000), 
+  }),
+)
 
-_Faker Enhanced honours the behaviour of the `Faker.seed()` configuration as outlined in the [original Python faker documentation](https://faker.readthedocs.io/en/master/#seeding-the-generator) (note that FakerJS is a port of the former library)._
+/*
+ *  Might something like:
+ *
+ * { 
+ *   4aa71604-2d35-4de2-8c86-9b6791bbc90a: { score: 667 },
+ *   e572ca5e-c857-493b-a212-95e3ec812b2c: { score: 446 },
+ *   82b46b13-2e0e-4572-a2cd-ded291cdb3f4: { score: 915 },
+ * }
+ * 
+ */
+```
