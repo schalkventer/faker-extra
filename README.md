@@ -43,7 +43,6 @@ fakerE.iteration(
  */
 ```
 
-
 **Usage:**
 
 - [`fakerE.frequency()`](#)
@@ -58,29 +57,6 @@ fakerE.iteration(
 ---
 
 ## Installing
-
-  - [HTML scripts](#via-html-scripts)
-  - [JavaScript module](#via-javascript-modules)
-
-### HTML scripts
-
-```html
-<html>
-  <head>
-    <!-- "defer" makes sure that scripts run in the order they are declared only after all HTML has loaded -->
-    <script src="https://unpkg.com/faker" defer></script>
-    <script src="https://unpkg.com/faker-extra" defer></script>
-  </head>
-  <body>
-    <script defer>
-      fakerE.frequency({ a: 10, b: 10, c: 90 });
-      fakerE.iteration(Math.random, 5, 20);
-    </script>
-  </body>
-<html>
-```
-
-### JavaScript module
 
 **Run via terminal/command-line in root of project.**
 
