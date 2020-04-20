@@ -98,7 +98,7 @@ _Note that you can also descructure only the required helpers from import if you
 import fakerE from 'faker-enhanced';
 
 fakerE.frequency({ a: 10, b: 10, c: 90 });
-fakerE.array(Math.random, 5, 20);
+fakerE.iteration(10, Math.random);
 ```
 
 ##### CommonJS
@@ -107,7 +107,7 @@ fakerE.array(Math.random, 5, 20);
 const fakerE = require('faker-enhanced');
 
 fakerE.frequency({ a: 10, b: 10, c: 90 });
-fakerE.array(Math.random, 5, 20);
+fakerE.iteration(10, Math.random);
 ```
 
 ##### TypeScript
@@ -116,7 +116,7 @@ fakerE.array(Math.random, 5, 20);
 import fakerE from 'faker-enhanced';
 
 fakerE.frequency<string>({ a: 10, b: 10, c: 90 });
-fakerE.array<number>(Math.random, 5, 20);
+fakerE.iteration<number>(10, Math.random);
 ```
 
 ## **API**
