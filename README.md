@@ -66,7 +66,7 @@ _Note: Packages should be imported as a development dependencies since you want 
 
 **Then import as follows:**
 
-_Note that you can also descructure only the required helpers from import if you want._
+_Note: that you can also descructure only the required helpers from import if you want._
 
 ##### ES Modules
 
