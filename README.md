@@ -162,6 +162,14 @@ fakerE.frequency(new Map([FIRST_OBJ, 10], [SECOND_OBJ, 20], [FIRST_ARRAY, 20], [
 
 ### `fakerE.iteration()`
 
+```ts
+<T extends any>(
+  length: number | [number, number] | any[]
+  value: any
+) => any[] | Record<any, any>
+```
+
+
 - To create an array with a length of 5:
 
 ```js
