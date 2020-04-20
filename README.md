@@ -14,6 +14,9 @@
 For example you might want to extend faker to mock something like follows:
 
 ```js
+import faker from 'faker';
+import fakerE from 'faker-enhanced';
+
 faker.seed(1);
 
 const uniqueIds = fakerE.iteration(
