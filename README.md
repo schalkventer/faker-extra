@@ -86,9 +86,7 @@ fakerE.iteration(
 
 _Note: Packages should be imported as a development dependency since you avoid using mock values in your production output._
 
-- **NPM:** `npm install --save-dev faker faker-enhanced`
-   
-- **Yarn:** `yarn add -D faker faker-enhanced`
+`npm install --save-dev faker faker-enhanced`
 
 **Then import as follows:**
 
