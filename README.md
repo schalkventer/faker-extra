@@ -67,7 +67,8 @@ fakerE.object(
 **Usage:**
 
 - 🔢 [`fakerE.frequency()`](#-fakerefrequency)
-- 🔁 [`fakerE.iteration()`](#-fakereiteration)
+- 🔁 [`fakerE.array()`](#-fakerearray)
+- 🔀 [`fakerE.object()`](#-fakereobject)
 
 **Examples:**
 
