@@ -1,6 +1,6 @@
 # 🎠 Faker.js Enhanced
 
-[![](https://travis-ci.org/schalkventer/react-html-connector.svg?branch=master)](https://travis-ci.org/schalkventer/react-html-connect) [![](https://img.shields.io/npm/dm/react-html-connector.svg)](https://www.npmjs.com/package/react-html-connector)
+![Tests](https://github.com/schalkventer/faker-enhanced/workflows/Tests/badge.svg) [![](https://img.shields.io/npm/dm/react-html-connector.svg)](https://www.npmjs.com/package/react-html-connector)
 
 `1.0.1`
 
