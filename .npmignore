@@ -1,0 +1,8 @@
+src
+docs
+.github
+.git
+yarn.lock
+tsconfig.json
+jest.config.js
+.gitignore

@@ -1,6 +1,6 @@
 # 🎠 Faker.js Enhanced
 
-![Tests](https://github.com/schalkventer/faker-enhanced/workflows/Tests/badge.svg) [![](https://img.shields.io/npm/dm/faker-enhanced.svg)](https://www.npmjs.com/package/faker-enhanced)
+![Tests](https://github.com/schalkventer/faker-enhanced/workflows/Tests/badge.svg) ![npm-publish](https://github.com/schalkventer/faker-enhanced/workflows/npm-publish/badge.svg) [![](https://img.shields.io/npm/dm/faker-enhanced.svg)](https://www.npmjs.com/package/faker-enhanced)
 
 `1.0.1`
 
