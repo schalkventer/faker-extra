@@ -2,14 +2,14 @@
 
 [![](https://img.shields.io/badge/Release-1.0.3-blue)](https://img.shields.io/npm/v/faker-enhanced) ![](https://github.com/schalkventer/faker-enhanced/workflows/Unit%20Tests/badge.svg) ![](https://github.com/schalkventer/faker-enhanced/workflows/NPM%20Package/badge.svg) [![](https://img.shields.io/npm/dm/faker-enhanced.svg)](https://www.npmjs.com/package/faker-enhanced)
 
-**Adds additional functionality and configurations options to base Faker.js library**
+Adds additional functionality and configurations options to base Faker.js library
 
 ![](https://raw.githubusercontent.com/schalkventer/faker-enhanced/master/docs/assets/logo.png)
 
 ## Why Faker Enhanced?
 
-- You want to mock a random value from a list, but you want some values to be returned more fequently than others.
-- You want to create arrays/objects of randomized lengths and with randomized values.
+- **You want to mock a random value from a list, but you want some values to be returned more frequently than others.**
+- **You want to create arrays/objects of randomized lengths and with randomized values.**
 
 For example you might want to extend `faker` with `faker-enhanced` to mock something like this:
 
