@@ -27,7 +27,7 @@ Adds additional functionality and configurations options to base Faker.js librar
 - **Returning an array of random length with no duplicates**:
   
   ```js
-  /* An array that contains between 0 and 3 unique values from source. */
+  /* An array that contains between 0 and 3 separate values from source. */
   
   const attended = fakerE.array([0, 3], ['2019', '2020', '2021', '2022', '2023'], true) 
   ```
