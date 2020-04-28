@@ -50,7 +50,7 @@ Adds additional functionality and configurations options to base Faker.js librar
 
   const competitorIds = fakerE.iteration([10, 3000], faker.random.uuid);
 
-  fakerE.object(
+  const competitors = fakerE.object(
     competitorIds, 
     () => ({
       awards: fakerE.array([0, 3], ['red', 'green', 'blue', 'orange'], true).
@@ -61,7 +61,9 @@ Adds additional functionality and configurations options to base Faker.js librar
 
   /*
    * Will return an object with anywhere between 10 to 3000 key/value pairs.
-   * These might look something like the following:
+   * 
+   * These will be randomly generated against the same seed (they will 
+   * always be the same random values). They might look something like this:
    *
    * { 
    *   4aa71604-2d35-4de2-8c86-9b6791bbc90a: { 
