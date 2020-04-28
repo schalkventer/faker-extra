@@ -94,9 +94,9 @@ Adds additional functionality and configurations options to base Faker.js librar
 
 **Installing**
 
-- ES Module(#es-modules)
-- TypeScript(#typescript)
-- CommonJS(#commonjs)
+- [ES Module](#es-modules)
+- [TypeScript](#typescript)
+- [CommonJS](#commonjs)
 - HTML _(coming soon)_
 
 **Usage:**
