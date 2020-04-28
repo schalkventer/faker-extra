@@ -1,6 +1,6 @@
 {
   "name": "faker-enhanced",
-  "version": "1.0.7",
+  "version": "1.0.9",
   "description": "Adds additional functionality and configuration options to base Faker.js library",
   "author": "Schalk Venter <venterschalk@gmail.com>",
   "license": "ISC",
