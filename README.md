@@ -2,7 +2,7 @@
 
 [![](https://img.shields.io/npm/v/faker-enhanced)](https://www.npmjs.com/package/faker-enhanced) ![](https://github.com/schalkventer/faker-enhanced/workflows/Unit%20Tests/badge.svg) ![](https://github.com/schalkventer/faker-enhanced/workflows/NPM%20Package/badge.svg) [![](https://img.shields.io/npm/dm/faker-enhanced.svg)](https://www.npmjs.com/package/faker-enhanced)
 
-Adds additional functionality and configurations options to base Faker.js library**
+Adds additional functionality and configurations options to base Faker.js library
 
 ![](https://raw.githubusercontent.com/schalkventer/faker-enhanced/master/docs/assets/logo.png)
 
@@ -92,6 +92,13 @@ Adds additional functionality and configurations options to base Faker.js librar
 
 ## Overview
 
+**Installing**
+
+- ES Module(#es-modules)
+- TypeScript(#typescript)
+- CommonJS(#commonjs)
+- HTML _(coming soon)_
+
 **Usage:**
 
 - 🔢 [`fakerE.frequency()`](#-fakerefrequency)
@@ -128,15 +135,6 @@ Adds additional functionality and configurations options to base Faker.js librar
    fakerE.iteration(10, Math.random);
    ```
 
-   ##### CommonJS
-
-   ```js
-   const fakerE = require('faker-enhanced');
-
-   fakerE.frequency({ a: 10, b: 10, c: 90 });
-   fakerE.iteration(10, Math.random);
-   ```
-
    ##### TypeScript
 
    ```ts
@@ -146,6 +144,14 @@ Adds additional functionality and configurations options to base Faker.js librar
    fakerE.iteration<number>(10, Math.random);
    ```
 
+   ##### CommonJS
+
+   ```js
+   const fakerE = require('faker-enhanced');
+
+   fakerE.frequency({ a: 10, b: 10, c: 90 });
+   fakerE.iteration(10, Math.random);
+   ```
 ---
 
 ## 🔢 `fakerE.frequency()`
