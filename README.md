@@ -4,7 +4,7 @@
 
 **Adds additional functionality and configurations options to base Faker.js library**
 
-![](https://raw.githubusercontent.com/schalkventer/faker-enhanced/master/docs/assets/es-logo.png)
+![](https://raw.githubusercontent.com/schalkventer/faker-enhanced/master/docs/assets/logo.png)
 
 ## Why Faker Enhanced?
 
