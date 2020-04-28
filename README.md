@@ -40,7 +40,7 @@ Adds additional functionality and configurations options to base Faker.js librar
   const winners = fakerE.object(['2019', '2020', '2021', '2022', '2023'], () => faker.random.number(10)) 
   ```
 
-- **Combining all of the above**:
+- **A mixture of all the above**:
 
   ```js
   import faker from 'faker';
