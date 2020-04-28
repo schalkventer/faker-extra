@@ -1,8 +1,6 @@
 # 🎠 Faker.js Enhanced
 
-![Unit Tests](https://github.com/schalkventer/faker-enhanced/workflows/Unit%20Tests/badge.svg) ![NPM Package](https://github.com/schalkventer/faker-enhanced/workflows/NPM%20Package/badge.svg) [![](https://img.shields.io/npm/dm/faker-enhanced.svg)](https://www.npmjs.com/package/faker-enhanced)
-
-`1.0.1`
+https://img.shields.io/badge/Version-1.0.3-blue ![Unit Tests](https://github.com/schalkventer/faker-enhanced/workflows/Unit%20Tests/badge.svg) ![NPM Package](https://github.com/schalkventer/faker-enhanced/workflows/NPM%20Package/badge.svg) [![](https://img.shields.io/npm/dm/faker-enhanced.svg)](https://www.npmjs.com/package/faker-enhanced)
 
 **Adds additional functionality and configurations options to base Faker.js library**
 
