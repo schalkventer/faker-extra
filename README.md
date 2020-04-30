@@ -159,7 +159,11 @@ Adds additional functionality and configurations options to base Faker.js librar
 **Creates an array/object who's length is equal, or ranging between, predefined amounts.**
 
 ```ts
-<T extends any>(ratios: number | Record<T, number>) => T
+<T extends any>(ratios: 
+  number | 
+  Record<T, number> | 
+  { percentage: number, value: T, call?: boolean }[]
+) => T
 ```
 
 - To return a boolean value:
@@ -187,7 +191,7 @@ Adds additional functionality and configurations options to base Faker.js librar
 - To return a value from a pre-defined list that has more than 2 items. _(Note that an error will be thrown if all frequencies do not add up to 100.)_
 
   ```js
-  fakerE.frequency({ 'A B C': 10, '': 20, 'C A B': 20, 'C B A': 20 })
+  fakerE.frequency({ 'A B C': 10, 'A C B': 20, 'C A B': 20, 'C B A': 50 })
 
   /*
    * - Has a 10% chance to return "A B C".
@@ -196,18 +200,114 @@ Adds additional functionality and configurations options to base Faker.js librar
    */
   ```
 
+- To return a values other than strings or numbers:
+
+  ```js
+  fakerE.frequency([
+    {
+      percentage: 10,
+      value: new Error('Oops!'),
+    },
+    {
+      percentage: 20,
+      value: [1, 2, 3, 4, 5],
+    },
+    {
+      percentage: 20,
+      value: faker.commerce.productName(),
+    },
+    {
+      percentage: 50,
+      value: false
+    }
+  ])
+
+  /*
+   * - Has a 10% chance to return the result of `new Error('Oops!')`.
+   * - Has a 20% chance to return `[1, 2, 3, 4, 5]` or the result of `faker.commerce.productName()`
+   * - Has a 50% chance to return `false`.
+   */
+  ```
+
+_Note that the above returns the result of `faker.commerce.productName()`. This means that it will not generate a new product name when that relevant value needs to be returned. If you want to dynamically provide a value each time you need to pass the function itself._
+
+- To execute a function everytime a value is aclled.
+
+  ```js
+    fakerE.frequency([
+      {
+        percentage: 10,
+        value: () => faker.random.number({ min: 10, max: 70 }),
+      },
+      {
+        percentage: 10,
+        value: faker.address.streetName,
+      },
+      {
+        percentage: 20,
+        value: () => new Date(),
+      },
+      {
+        percentage: 50,
+        value: fakerE.array([1, 5], true),
+      }
+    ])
+
+    /*
+     * - Has a 10% chance to that a number between 10 and 70 will be returned.
+     * - Has a 20% chance to that a random street name or the current date will be returned.
+     * - Has a 50% that an array with containing between 1 and 5 instances of `true` .
+     */
+  ```
+
+_Functions are automatically called by default. This means that if you want the result itself to be the provided function you should set `call` to `false`._
+
+- To return a functions as the actual result:
+
+  ```js
+    fakerE.frequency([
+      {
+        percentage: 10,
+        value: () => console.log('1'),
+        call: false,
+      },
+      {
+        percentage: 10,
+        value: () => console.log('2'),
+        call: false,
+      },
+      {
+        percentage: 20,
+        value: () => console.log('3'),
+        call: false,
+      },
+      {
+        percentage: 50,
+        value: () => console.log('4'),
+        call: false,
+      }
+    ])
+
+    /*
+     * - Has a 10% chance to return a function that will log "1" to the console when called.
+     * - Has a 20% chance to return a function that will log "2" or "3" to the console when called.
+     * - Has a 50% chance to return a function that will log "4" to the console when called.
+     */
+  ```
+
 ---
 
 ## 🔁 `fakerE.array()`
 
 **Returns an array created from pre-defined values.**
 
- ```ts
- <T extends any>(
-   length: number | [number, number],
-   value?: T,
- ) => T[] 
- ```
+```ts
+<T extends any>(
+  length: number | [number, number],
+  value?: T | (() => T) | T[],
+  extract?: boolean
+): T[]
+```
 
  - To create an array with a length of 5:
 
@@ -219,7 +319,7 @@ Adds additional functionality and configurations options to base Faker.js librar
     */
    ```
 
-   - To create an array with a random length between 3 and 6:
+- To create an array with a random length between 3 and 6:
 
    ```js
    fakerE.iteration([3, 6]) 

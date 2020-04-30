@@ -11,16 +11,59 @@ import faker from 'faker';
 /**
  * Returns a random value from a list at a pre-defined frequency
  */
-export const frequency = <T extends any>(ratios: number | Record<T, number>): boolean | T => {
-  const isNumber: boolean = typeof ratios === 'number';
+export const frequency = <T extends any>(ratios: 
+  number | 
+  Record<string | number | symbol, number> |
+  { percentage: number, value: T, call?: boolean }[]
+): boolean | string | number | symbol | T => {
   const randomNumber = faker.random.number(100);
 
-  if (isNumber) {
+  /*
+   * Check if ratios is number.
+   */
+
+  if (typeof ratios === 'number') {
     const ratiosAsNumber = ratios as number;
-    return randomNumber < ratiosAsNumber;
+    return randomNumber < ratiosAsNumber as boolean;
   }
 
-  const ratiosAsObj = ratios as Record<any, number>;
+  /*
+   * Check if ratios is an array.
+   */
+
+  if (Array.isArray(ratios)) {
+    const ratiosAsArray = ratios as { percentage: number, value: T, call?: boolean }[];
+    const percentages = ratiosAsArray.map(({ percentage }) => percentage);
+
+    const total = percentages.reduce(
+      (result, percentage) => result + percentage,
+      0,
+    )
+  
+    if (total !== 100) {
+      throw new Error('All supplied percentages do not add up to 100%');
+    }
+
+    let accumulator = 0;
+  
+    for (const { percentage, value, call = true } of ratios) {
+      if (randomNumber < accumulator + percentage) {
+        if (typeof value === 'function' && call) {
+          return value() as T;
+        }
+
+        return value as T;
+      }
+  
+      accumulator += percentage;
+    }
+  }
+
+  /*
+   * Infers that ratios is an object.
+   */
+
+  const ratiosAsObj = ratios as Record<string | number | symbol, number>;
   const values = Object.keys(ratios);
   const percentages = values.map(key => ratiosAsObj[key]);
   const zipped = values.map((value) => ({ percentage: ratiosAsObj[value], value }));
@@ -38,13 +81,13 @@ export const frequency = <T extends any>(ratios: number | Record<T, number>): bo
   
   for (const { percentage, value } of zipped) {
     if (randomNumber < accumulator + percentage) {
-      return value as any;
+      return value as string | number | symbol;
     }
 
     accumulator += percentage;
   }
 
-  return values[values.length - 1] as any;
+  return values[values.length - 1] as string | number | symbol;
 }
 
 /**
