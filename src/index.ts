@@ -144,7 +144,7 @@ export const array = <T extends unknown>(
  */
 export const object = <K extends string | number | symbol, T extends unknown, >(
   length: K[],
-  value?: T | ((key: K) => T),
+  value: T | ((key: K) => T),
 ): Record<K, T> => {
   const valueIsFn = typeof value === 'function';
   const lenghtAsArray = length as K[];
