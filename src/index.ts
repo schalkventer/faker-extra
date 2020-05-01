@@ -142,7 +142,7 @@ export const array = <T extends unknown>(
 /**
  * Returns an object created from pre-defined values.
  */
-export const object = <K extends string, T extends unknown, >(
+export const object = <K extends string | number | symbol, T extends unknown, >(
   length: K[],
   value?: T | ((key: K) => T),
 ): Record<K, T> => {
