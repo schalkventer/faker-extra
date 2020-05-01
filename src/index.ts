@@ -11,11 +11,11 @@ import faker from 'faker';
 /**
  * Returns a random value from a list at a pre-defined frequency
  */
-export const frequency = <T extends any>(ratios: 
+export const frequency = <T extends unknown>(ratios: 
   number | 
   Record<string | number | symbol, number> |
   { percentage: number, value: T, call?: boolean }[]
-): boolean | string | number | symbol | T => {
+): T => {
   const randomNumber = faker.random.number(100);
 
   /*
@@ -24,7 +24,7 @@ export const frequency = <T extends any>(ratios:
 
   if (typeof ratios === 'number') {
     const ratiosAsNumber = ratios as number;
-    return randomNumber < ratiosAsNumber as boolean;
+    return randomNumber < ratiosAsNumber as T;
   }
 
   /*
@@ -81,19 +81,19 @@ export const frequency = <T extends any>(ratios:
   
   for (const { percentage, value } of zipped) {
     if (randomNumber < accumulator + percentage) {
-      return value as string | number | symbol;
+      return value as T;
     }
 
     accumulator += percentage;
   }
 
-  return values[values.length - 1] as string | number | symbol;
+  return values[values.length - 1] as T;
 }
 
 /**
  * Returns an array created from pre-defined values.
  */
-export const array = <T extends any>(
+export const array = <T extends unknown>(
   length: number | [number, number],
   value?: T | (() => T) | T[],
   extract?: boolean
