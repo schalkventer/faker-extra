@@ -249,7 +249,7 @@ _Note that the above returns the result of `faker.commerce.productName()`. This 
       },
       {
         percentage: 50,
-        value: fakerE.array([1, 5], true),
+        value: () => fakerE.array([1, 5], true),
       }
     ])
 
