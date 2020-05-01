@@ -8,14 +8,13 @@ import faker from 'faker';
  * Module exports 
  */
 
+type frequencyObject = Record<string | number | symbol, number>;
+type frequencyArray<T> = { percentage: number, value: T | (() => T), call?: boolean }[];
+
 /**
  * Returns a random value from a list at a pre-defined frequency
  */
-export const frequency = <T extends unknown>(ratios: 
-  number | 
-  Record<string | number | symbol, number> |
-  { percentage: number, value: T, call?: boolean }[]
-): T => {
+export const frequency = <T extends unknown>(ratios: number | frequencyObject | frequencyArray<T>): T => {
   const randomNumber = faker.random.number(100);
 
   /*
@@ -49,7 +48,8 @@ export const frequency = <T extends unknown>(ratios:
     for (const { percentage, value, call = true } of ratios) {
       if (randomNumber < accumulator + percentage) {
         if (typeof value === 'function' && call) {
-          return value() as T;
+          const valueAsFunction = value as (() => T);
+          return valueAsFunction() as T;
         }
 
         return value as T;
