@@ -57,6 +57,15 @@ export const frequency = <T extends unknown>(ratios: number | frequencyObject | 
   
       accumulator += percentage;
     }
+
+    const lastItem = ratios[ratios.length - 1];
+
+    if (typeof lastItem.value === 'function' && lastItem.call) {
+      const valueAsFunction = lastItem.value as () => T;
+      return valueAsFunction() as T;
+    }
+
+    return lastItem.value as T;
   }
 
   /*
