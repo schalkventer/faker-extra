@@ -190,7 +190,7 @@ describe('array', () => {
 
 describe('object', () => {
   test('empty', () => {
-    expect(fakerE.object([])).toEqual({})
+    expect(fakerE.object([], () => true)).toEqual({})
   });
 
   test('1-6 false', () => {
