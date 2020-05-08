@@ -13,7 +13,7 @@ Adds additional functionality and configurations options to base Faker.js librar
   ```js
   /* 65% chance to be 'bronze', 30% chance to be 'silver' and 5% chance to be 'gold' */
 
-  const league = fakerE.frequency({ 65: 'bronze', 30: 'silver', 5: 'gold' }) 
+  const league = fakerE.frequency({ bronze: 65, silver: 30, gold: 5 }) 
   ```
 
 - **Returning an array of random length**:
@@ -55,7 +55,7 @@ Adds additional functionality and configurations options to base Faker.js librar
     () => ({
       awards: fakerE.array([0, 3], ['red', 'green', 'blue', 'orange'], true).
       score: Math.round(Math.random() * 1000),
-      league: fakerE.frequency({ 65: 'bronze', 30: 'silver', 5: 'gold' }),
+      league: fakerE.frequency({ bronze: 65, silver: 30, gold: 5 }),
     }),
   )
 
