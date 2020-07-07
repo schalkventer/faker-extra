@@ -1,4 +1,4 @@
-# 🎠 Faker.js Enhanced
+# 🎠 Faker Extra
 
 [![](https://img.shields.io/npm/v/faker-enhanced)](https://www.npmjs.com/package/faker-enhanced) ![](https://github.com/schalkventer/faker-enhanced/workflows/Unit%20Tests/badge.svg) ![](https://github.com/schalkventer/faker-enhanced/workflows/NPM%20Package/badge.svg) [![](https://img.shields.io/npm/dm/faker-enhanced.svg)](https://www.npmjs.com/package/faker-enhanced)
 
