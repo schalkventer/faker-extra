@@ -8,7 +8,7 @@ Adds additional functionality and configurations options to base Faker.js librar
 
 ![](https://raw.githubusercontent.com/schalkventer/faker-enhanced/master/docs/assets/logo.png)
 
-## Why Faker Enhanced?
+## Why Faker Extra?
 
 - **Returning random values at different frequencies**:
   
