@@ -112,6 +112,28 @@ describe('frequency', () => {
 
     expect(result).toEqual(['d', 'd', 'd', 'd', 'd', 'd', 'd'])
   });
+
+  const ABC = {
+    a: 100 / 3,
+    b: 100 / 3,
+    c: 100 / 3,
+  }
+
+  test('99.99999999999999%', () => {
+    const result = [
+      fakerE.frequency(ABC),
+      fakerE.frequency(ABC),
+      fakerE.frequency(ABC),
+      fakerE.frequency(ABC),
+      fakerE.frequency(ABC),
+      fakerE.frequency(ABC),
+      fakerE.frequency(ABC)
+    ]
+
+    expect(result).toEqual(['b', 'c', 'c', 'c', 'a', 'a', 'a'])
+  });
+
+
 });
 
 /**

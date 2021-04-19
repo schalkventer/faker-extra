@@ -15,7 +15,7 @@ type frequencyArray<T> = { percentage: number, value: T | (() => T), call?: bool
  * Returns a random value from a list at a pre-defined frequency
  */
 export const frequency = <T extends unknown>(ratios: number | frequencyObject | frequencyArray<T>): T => {
-  const randomNumber = faker.random.number(100);
+  const randomNumber = faker.datatype.number(100);
 
   /*
    * Check if ratios is number.
@@ -39,7 +39,7 @@ export const frequency = <T extends unknown>(ratios: number | frequencyObject | 
       0,
     )
   
-    if (total !== 100) {
+    if (total.toPrecision(12) !== '100.000000000') {
       throw new Error('All supplied percentages do not add up to 100%');
     }
 
@@ -82,7 +82,7 @@ export const frequency = <T extends unknown>(ratios: number | frequencyObject | 
     0,
   )
 
-  if (total !== 100) {
+  if (total.toPrecision(12) !== '100.000000000') {
     throw new Error('All supplied percentages do not add up to 100%');
   }
 
@@ -109,7 +109,7 @@ export const array = <T extends unknown>(
 ): T[] => {
 
   const valueIsFn = typeof value === 'function';
-  const finalLength = !Array.isArray(length) ? length : faker.random.number({ min: length[0], max: length[1] });
+  const finalLength = !Array.isArray(length) ? length : faker.datatype.number({ min: length[0], max: length[1] });
 
   if (!valueIsFn && !extract) {
     const valueAsValue = value as T;
@@ -137,7 +137,7 @@ export const array = <T extends unknown>(
 
   return new Array(lengthDifference).fill(undefined).reduce(
     (result) => {
-      const index = faker.random.number({ min: 0, max: result.length - 1 });
+      const index = faker.datatype.number({ min: 0, max: result.length - 1 });
 
       return [
         ...result.slice(0, index),
