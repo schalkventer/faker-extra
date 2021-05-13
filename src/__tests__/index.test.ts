@@ -1,13 +1,16 @@
 import faker from 'faker';
 import fakerE from '..';
 
-faker.seed(1);
-
 /**
  * Frequency helper
  */
 
 describe('frequency', () => {
+
+  beforeEach(() => {
+    faker.seed(1);
+  });
+
   test('50% boolean', () => {
     const result = [
       fakerE.frequency(50),
@@ -33,7 +36,7 @@ describe('frequency', () => {
       fakerE.frequency(99),
     ]
 
-    expect(result).toEqual([false, true, true, true, true, true, true])
+    expect(result).toEqual([true, false, true, true, true, true, true])
   });
 
   test('1% boolean', () => {
@@ -47,7 +50,7 @@ describe('frequency', () => {
       fakerE.frequency(1),
     ]
 
-    expect(result).toEqual([false, false, false, false, false, false, false])
+    expect(result).toEqual([false, false, false, false, true, false, false])
   });
 
   const ABCD_SPLIT = {
@@ -68,7 +71,7 @@ describe('frequency', () => {
       fakerE.frequency(ABCD_SPLIT),
     ]
 
-    expect(result).toEqual(['b', 'c', 'c', 'a', 'b', 'd', 'a'])
+    expect(result).toEqual(['b', 'd', 'c', 'd', 'a', 'a', 'b'])
   });
 
   const ABCD_A = {
@@ -89,7 +92,7 @@ describe('frequency', () => {
       fakerE.frequency(ABCD_A),
     ]
 
-    expect(result).toEqual(['a', 'a', 'a', 'a', 'a', 'a', 'a'])
+    expect(result).toEqual(['a', 'd', 'a', 'a', 'a', 'a', 'a'])
   });
 
   const ABCD_D = {
@@ -110,7 +113,7 @@ describe('frequency', () => {
       fakerE.frequency(ABCD_D),
     ]
 
-    expect(result).toEqual(['d', 'd', 'd', 'd', 'd', 'd', 'd'])
+    expect(result).toEqual(['d', 'd', 'd', 'd', 'a', 'd', 'd'])
   });
 
   const ABC = {
@@ -133,7 +136,6 @@ describe('frequency', () => {
     expect(result).toEqual(['b', 'c', 'c', 'c', 'a', 'a', 'a'])
   });
 
-
 });
 
 /**
@@ -141,6 +143,11 @@ describe('frequency', () => {
  */
 
 describe('array', () => {
+
+  beforeEach(() => {
+    faker.seed(1);
+  });
+
   test('empty', () => {
     expect(fakerE.array(0)).toEqual([])
   });
@@ -178,17 +185,16 @@ describe('array', () => {
       fakerE.array<true>([3, 12], true).length,
     ];
 
-    expect(results).toEqual([12,11,6,3,9,8,11,11,11,11,3,11,3])
+    expect(results).toEqual([7,12,10,12,3,4,6,12,4,5,3,6,4])
   });
 
-  
   test('5 callback', () => {
-    expect(fakerE.array<number>(5, () => faker.random.number(100))).toEqual([
-      27,
-      17,
-      5,
-      88,
-      67
+    expect(fakerE.array<number>(5, () => faker.datatype.number(100))).toEqual([
+      42,
+      100,
+      72,
+      94,
+      0
     ])
   });
 
@@ -201,7 +207,7 @@ describe('array', () => {
       fakerE.array<number>([3, 5], [1, 2, 3, 4, 5, 6, 7, 8, 9], true).length,
     ]
 
-    expect(result).toEqual([3,3,5,4,4])
+    expect(result).toEqual([4,3,4,5,3])
   });
 });
 
@@ -211,6 +217,11 @@ describe('array', () => {
  */
 
 describe('object', () => {
+
+  beforeEach(() => {
+    faker.seed(1);
+  });
+
   test('empty', () => {
     expect(fakerE.object([], () => true)).toEqual({})
   });
@@ -238,13 +249,13 @@ describe('object', () => {
   });
 
   test('a-g random number', () => {
-    expect(fakerE.object(['a', 'b', 'c', 'd', 'e', 'g'], () => faker.random.number(100))).toEqual({
-      a: 47,
-      b: 91,
-      c: 9,
-      d: 29,
-      e: 91,
-      g: 29,
+    expect(fakerE.object(['a', 'b', 'c', 'd', 'e', 'g'], () => faker.datatype.number(100))).toEqual({
+      a: 42,
+      b: 100,
+      c: 72,
+      d: 94,
+      e: 0,
+      g: 12,
     })
   });
 });
