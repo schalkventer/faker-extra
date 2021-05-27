@@ -8,6 +8,12 @@ Adds additional functionality and configurations options to base Faker.js librar
 
 ![](https://raw.githubusercontent.com/schalkventer/faker-enhanced/master/docs/assets/logo.png)
 
+## Contributions
+
+<img src="https://avatars.githubusercontent.com/u/14258328?s=64&v=4" style="border-radius: 50%">
+
+<img src="https://avatars.githubusercontent.com/u/45512151?s=64&v=4" style="border-radius: 50%">
+
 ## Why Faker Extra?
 
 - **Returning random values at different frequencies**:
