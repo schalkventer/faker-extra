@@ -1,12 +1,12 @@
 # 🎠 Faker Extra
 
-[![](https://img.shields.io/npm/v/faker-enhanced)](https://www.npmjs.com/package/faker-enhanced) ![](https://img.shields.io/github/stars/schalkventer/faker-extra?style=social) ![](https://github.com/schalkventer/faker-enhanced/workflows/Unit%20Tests/badge.svg) ![](https://github.com/schalkventer/faker-enhanced/workflows/NPM%20Package/badge.svg) [![](https://img.shields.io/npm/dm/faker-enhanced.svg)](https://www.npmjs.com/package/faker-enhanced)
+[![](https://img.shields.io/npm/v/faker-extra)](https://www.npmjs.com/package/faker-extra) ![](https://img.shields.io/github/stars/schalkventer/faker-extra?style=social) ![](https://github.com/schalkventer/faker-extra/workflows/Unit%20Tests/badge.svg) ![](https://github.com/schalkventer/faker-extra/workflows/NPM%20Package/badge.svg) [![](https://img.shields.io/npm/dm/faker-extra.svg)](https://www.npmjs.com/package/faker-extra)
 
-*⭐️ If you find this useful please star it on [Github](https://github.com/schalkventer/faker-enhanced) ⭐️*
+*⭐️ If you find this useful please star it on [Github](https://github.com/schalkventer/faker-extra) ⭐️*
 
 Adds additional functionality and configurations options to base Faker.js library
 
-![](https://raw.githubusercontent.com/schalkventer/faker-enhanced/master/docs/assets/logo.png)
+![](https://raw.githubusercontent.com/schalkventer/faker-extra/master/docs/assets/logo.png)
 
 ## Why Faker Extra?
 
@@ -46,7 +46,7 @@ Adds additional functionality and configurations options to base Faker.js librar
 
   ```js
   import faker from 'faker';
-  import fakerE from 'faker-enhanced';
+  import fakerE from 'faker-extra';
 
   faker.seed(1);
 
@@ -122,7 +122,7 @@ Adds additional functionality and configurations options to base Faker.js librar
 
    _Note: Packages should be installed as a development dependencies since you want to avoid using mock values in your production output._
 
-   `npm install --save-dev faker faker-enhanced`
+   `npm install --save-dev faker faker-extra`
 
 2. **Then import as follows:**
    
@@ -131,7 +131,7 @@ Adds additional functionality and configurations options to base Faker.js librar
    ##### ES Modules
 
    ```js
-   import fakerE from 'faker-enhanced';
+   import fakerE from 'faker-extra';
 
    fakerE.frequency({ a: 10, b: 10, c: 90 });
    fakerE.iteration(10, Math.random);
@@ -140,7 +140,7 @@ Adds additional functionality and configurations options to base Faker.js librar
    ##### TypeScript
 
    ```ts
-   import fakerE from 'faker-enhanced';
+   import fakerE from 'faker-extra';
 
    fakerE.frequency<string>({ a: 10, b: 10, c: 90 });
    fakerE.iteration<number>(10, Math.random);
@@ -149,7 +149,7 @@ Adds additional functionality and configurations options to base Faker.js librar
    ##### CommonJS
 
    ```js
-   const fakerE = require('faker-enhanced');
+   const fakerE = require('faker-extra');
 
    fakerE.frequency({ a: 10, b: 10, c: 90 });
    fakerE.iteration(10, Math.random);
