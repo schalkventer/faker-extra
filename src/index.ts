@@ -2,7 +2,7 @@
  * Third-party modules
  */
 
-import faker from 'faker';
+import faker from '@withshepherd/faker';
 
 /*
  * Module exports 

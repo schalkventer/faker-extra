@@ -1,6 +1,6 @@
 {
   "name": "faker-extra",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "description": "Adds additional functionality and configuration options to base Faker.js library",
   "author": "Schalk Venter <venterschalk@gmail.com>",
   "license": "ISC",
@@ -14,9 +14,11 @@
   "devDependencies": {
     "@types/faker": "^5.5.3",
     "@types/jest": "^25.2.1",
-    "faker": "5.5.x",
     "jest": "^25.4.0",
     "ts-jest": "^25.4.0",
     "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "@withshepherd/faker": "^5.5.5"
   }
 }
