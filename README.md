@@ -1,70 +1,35 @@
 # 🎠 Faker Extra
 
-[![](https://img.shields.io/npm/v/faker-extra)](https://www.npmjs.com/package/faker-extra) ![](https://img.shields.io/github/stars/schalkventer/faker-extra?style=social) ![](https://github.com/schalkventer/faker-extra/workflows/Unit%20Tests/badge.svg) ![](https://github.com/schalkventer/faker-extra/workflows/NPM%20Package/badge.svg) [![](https://img.shields.io/npm/dm/faker-extra.svg)](https://www.npmjs.com/package/faker-extra)
+[![](https://img.shields.io/npm/v/faker-extra)](https://www.npmjs.com/package/faker-extra) ![](https://img.shields.io/github/stars/schalkventer/faker-extra?style=social) ![](https://github.com/schalkventer/faker-extra/workflows/NPM%20Package/badge.svg) [![](https://img.shields.io/npm/dm/faker-extra.svg)](https://www.npmjs.com/package/faker-extra)
 
 _⭐️ If you find this useful please star it on [Github](https://github.com/schalkventer/faker-extra) ⭐️_
 
-_😱 Concerned about the removal of the around the original faker library from NPM? Don't worry, Faker Extra contains a fork of the original library. 😱_
+_💚 Looking for a replacement for the original Faker library (deleted from Github in 2022)? You can use faker-extra as a drop in replacement for Faker (even without using any of extra functionality)! 💚_
 
 Contains original Faker.js functionality and extra methods, similar to [fs-extra](https://www.npmjs.com/package/fs-extra).
 
 ![](https://raw.githubusercontent.com/schalkventer/faker-extra/master/docs/assets/logo.png)
 
-## Why Faker Extra?
+## Embedded Faker
 
-- **Returning random values at different frequencies**:
+Due to the removal of the original Faker.js library from Github in early 2022, this project has the latest working version and types of Faker.js (1.5.3) built directly into it. This means that the import from `faker-extra` functions exactly in the same way as the original Faker.js package (and can even be used as a replacement for the original Package).
 
-  ```js
-  /* 65% chance to be 'bronze', 30% chance to be 'silver' and 5% chance to be 'gold' */
+The only difference is that `faker-extra` has an optional extra property called `extra` that can be accessed by means of `faker-extra`. You can use the original faker methods and the extra methods as follows:
 
-  const league = faker.frequency({ bronze: 65, silver: 30, gold: 5 });
-  ```
-
-- **Returning an array of random length**:
-
-  ```js
-  /* An array of anywhere between 10 and 3000 unique IDs. */
-
-  const competitorId = faker.array([10, 3000], faker.random.uuid);
-  ```
-
-- **Returning an array of random length with no duplicates**:
-
-  ```js
-  /* An array that contains between 0 and 3 separate values from source. */
-
-  const attended = faker.array(
-    [0, 3],
-    ["2019", "2020", "2021", "2022", "2023"],
-    true
-  );
-  ```
-
-- **Returning an object with random values**:
-
-  ```js
-  /* An object that has all years and the amount of winners as values. */
-
-  const winners = faker.object(["2019", "2020", "2021", "2022", "2023"], () =>
-    faker.random.number(10)
-  );
-  ```
-
-- **A mixture of all the above**:
 
   ```js
   import faker from 'faker-extra';
 
   faker.seed(1);
 
-  const competitorIds = faker.array([10, 3000], faker.random.uuid);
+  const competitorIds = faker.extra.array([10, 3000], faker.datatype.uuid);
 
-  const competitors = faker.object(
+  const competitors = faker.extra.object(
     competitorIds,
     () => ({
-      awards: faker.array([0, 3], ['red', 'green', 'blue', 'orange'], true).
-      score: Math.round(Math.random() * 1000),
-      league: faker.frequency({ bronze: 65, silver: 30, gold: 5 }),
+      awards: faker.extra.array([0, 3], ['red', 'green', 'blue', 'orange'], true).
+      score: faker.datatype.number({ min: 0, max: 1000 }),
+      league: faker.extra.frequency({ bronze: 65, silver: 30, gold: 5 }),
     }),
   )
 
@@ -99,6 +64,45 @@ Contains original Faker.js functionality and extra methods, similar to [fs-extra
    */
   ```
 
+## Why Faker Extra?
+
+- **Returning random values at different frequencies**:
+
+  ```js
+  /* 65% chance to be 'bronze', 30% chance to be 'silver' and 5% chance to be 'gold' */
+
+  const league = faker.extra.frequency({ bronze: 65, silver: 30, gold: 5 });
+  ```
+
+- **Returning an array of random length**:
+
+  ```js
+  /* An array of anywhere between 10 and 3000 unique IDs. */
+
+  const competitorId = faker.extra.array([10, 3000], faker.datatype.uuid);
+  ```
+
+- **Returning an array of random length with no duplicates**:
+
+  ```js
+  /* An array that contains between 0 and 3 separate values from source. */
+
+  const attended = faker.extra.array(
+    [0, 3],
+    ["2019", "2020", "2021", "2022", "2023"],
+    true
+  );
+  ```
+
+- **Returning an object with random values**:
+
+  ```js
+  /* An object that has all years and the amount of winners as values. */
+
+  const winners = faker.extra.object(["2019", "2020", "2021", "2022", "2023"], () =>
+    faker.datatype.number(10)
+  );
+  ```
 ## Overview
 
 **Installing**
@@ -110,9 +114,9 @@ Contains original Faker.js functionality and extra methods, similar to [fs-extra
 
 **Usage:**
 
-- 🔢 [`faker.frequency()`](#-fakrefrequency)
-- 🔁 [`faker.array()`](#-fakerearray)
-- 🔀 [`faker.object()`](#-fakereobject)
+- 🔢 [`faker.extra.frequency()`](#-fakrefrequency)
+- 🔁 [`faker.extra.array()`](#-fakerearray)
+- 🔀 [`faker.extra.object()`](#-fakereobject)
 
 **Examples:**
 
@@ -140,8 +144,8 @@ Contains original Faker.js functionality and extra methods, similar to [fs-extra
    ```js
    import faker from "faker-extra";
 
-   faker.frequency({ a: 10, b: 10, c: 90 });
-   faker.iteration(10, Math.random);
+   faker.extra.frequency({ a: 10, b: 10, c: 90 });
+   faker.extra.array(10, Math.random);
    ```
 
    ##### TypeScript
@@ -149,8 +153,8 @@ Contains original Faker.js functionality and extra methods, similar to [fs-extra
    ```ts
    import faker from "faker-extra";
 
-   faker.frequency<string>({ a: 10, b: 10, c: 90 });
-   faker.iteration<number>(10, Math.random);
+   faker.extra.frequency<string>({ a: 10, b: 10, c: 90 });
+   faker.extra.array<number>(10, Math.random);
    ```
 
    ##### CommonJS
@@ -158,13 +162,13 @@ Contains original Faker.js functionality and extra methods, similar to [fs-extra
    ```js
    const faker = require("faker-extra");
 
-   faker.frequency({ a: 10, b: 10, c: 90 });
-   faker.iteration(10, Math.random);
+   faker.extra.frequency({ a: 10, b: 10, c: 90 });
+   faker.extra.array(10, Math.random);
    ```
 
 ---
 
-## 🔢 `faker.frequency()`
+## 🔢 `faker.extra.frequency()`
 
 **Creates an array/object who's length is equal, or ranging between, predefined amounts.**
 
@@ -180,7 +184,7 @@ Contains original Faker.js functionality and extra methods, similar to [fs-extra
 - To return a boolean value:
 
   ```js
-  faker.frequency(70);
+  faker.extra.frequency(70);
 
   /*
    * - Has a 70% chance to return `true`
@@ -191,7 +195,7 @@ Contains original Faker.js functionality and extra methods, similar to [fs-extra
 - To return a value from a pre-defined list.
 
   ```js
-  faker.frequency({ a: 70, b: 30 });
+  faker.extra.frequency({ a: 70, b: 30 });
 
   /*
    * - Has a 70% chance to return "a".
@@ -202,7 +206,7 @@ Contains original Faker.js functionality and extra methods, similar to [fs-extra
 - To return a value from a pre-defined list that has more than 2 items. _(Note that an error will be thrown if all frequencies do not add up to 100.)_
 
   ```js
-  faker.frequency({ "A B C": 10, "A C B": 20, "C A B": 20, "C B A": 50 });
+  faker.extra.frequency({ "A B C": 10, "A C B": 20, "C A B": 20, "C B A": 50 });
 
   /*
    * - Has a 10% chance to return "A B C".
@@ -214,7 +218,7 @@ Contains original Faker.js functionality and extra methods, similar to [fs-extra
 - To return a values other than strings or numbers:
 
   ```js
-  faker.frequency([
+  faker.extra.frequency([
     {
       percentage: 10,
       value: new Error("Oops!"),
@@ -245,10 +249,10 @@ _Note that the above returns the result of `faker.commerce.productName()`. This 
 - To execute a function everytime a value is aclled.
 
   ```js
-  faker.frequency([
+  faker.extra.frequency([
     {
       percentage: 10,
-      value: () => faker.random.number({ min: 10, max: 70 }),
+      value: () => faker.datatype.number({ min: 10, max: 70 }),
     },
     {
       percentage: 10,
@@ -260,7 +264,7 @@ _Note that the above returns the result of `faker.commerce.productName()`. This 
     },
     {
       percentage: 50,
-      value: () => faker.array([1, 5], true),
+      value: () => faker.extra.array([1, 5], true),
     },
   ]);
 
@@ -276,7 +280,7 @@ _Functions are automatically called by default. This means that if you want the 
 - To return a functions as the actual result:
 
   ```js
-  faker.frequency([
+  faker.extra.frequency([
     {
       percentage: 10,
       value: () => console.log("1"),
@@ -308,7 +312,7 @@ _Functions are automatically called by default. This means that if you want the 
 
 ---
 
-## 🔁 `faker.array()`
+## 🔁 `faker.extra.array()`
 
 **Returns an array created from pre-defined values.**
 
@@ -323,7 +327,7 @@ _Functions are automatically called by default. This means that if you want the 
 - To create an array with a length of 5:
 
   ```js
-  faker.iteration(5);
+  faker.extra.array(5);
 
   /*
    * Will be `[undefined, undefined, undefined, undefined, undefined]`.
@@ -333,7 +337,7 @@ _Functions are automatically called by default. This means that if you want the 
 - To create an array with a random length between 3 and 6:
 
   ```js
-  faker.iteration([3, 6]);
+  faker.extra.array([3, 6]);
 
   /*
    * - Has a 25% chance to be `[undefined, undefined, undefined]`
@@ -346,7 +350,7 @@ _Functions are automatically called by default. This means that if you want the 
 - To populate it with a value:
 
   ```js
-  faker.iteration(5, "abc");
+  faker.extra.array(5, "abc");
 
   /*
    * Will be `["abc", "abc", "abc", "abc", "abc"]`.
@@ -356,7 +360,7 @@ _Functions are automatically called by default. This means that if you want the 
 - To populate it with by means of a callback:
 
   ```js
-  faker.iteration(3, Math.random);
+  faker.extra.array(3, Math.random);
 
   /*
    *  Might something like `[0.3667866123486143, 0.44642296430964445, 0.915051909777594]`
@@ -366,7 +370,7 @@ _Functions are automatically called by default. This means that if you want the 
 - To extract from an existing array add `true` as the third argument.
 
   ```js
-  faker.iteration([2, 4], ["a", "b", "c", "d", "e"], true);
+  faker.exra.array([2, 4], ["a", "b", "c", "d", "e"], true);
 
   /*
    *  Might something like `['c', 'e']` or [`'d', 'a', 'e', 'b']`
@@ -376,7 +380,7 @@ _Functions are automatically called by default. This means that if you want the 
   - To populate an array with objects via a callback:
 
   ```js
-  faker.iteration(3, () => ({
+  faker.extra.array(3, () => ({
     score: Math.round(Math.random() * 1000),
   }));
 
@@ -394,7 +398,7 @@ _Functions are automatically called by default. This means that if you want the 
 
 ---
 
-## 🔀 `faker.object()`
+## 🔀 `faker.extra.object()`
 
 **Returns an array created from pre-defined values.**
 
@@ -408,7 +412,7 @@ _Functions are automatically called by default. This means that if you want the 
 - To create an object from `['a', 'b', 'c', 'd', 'e']` keys:
 
   ```js
-  faker.object(["a", "b", "c", "d", "e"]);
+  faker.extra.object(["a", "b", "c", "d", "e"]);
 
   /*
    * Will be:
@@ -427,7 +431,7 @@ _Functions are automatically called by default. This means that if you want the 
 - To create an object from the `[1, 2, 3, 4, 5]` keys and `'abc'` as a value:
 
   ```js
-  faker.object([1, 2, 3, 4, 5], "abc");
+  faker.extra.object([1, 2, 3, 4, 5], "abc");
 
   /*
    * Will be:
