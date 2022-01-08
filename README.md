@@ -23,24 +23,24 @@ Contains original Faker.js functionality and extra methods, similar to [fs-extra
   - [`faker.extra.object()`](#fakerextraobject)
 ## Usage
 
-Due to the removal of the original Faker.js library from Github in early 2022, this project has the latest working version and types of Faker.js (1.5.3) built directly into it. This means that the import from `faker-extra` functions exactly in the same way as the original Faker.js package (and can even be used as a replacement for the original Package).
+Due to the removal of the original Faker.js library from Github in early 2022, this project has the latest working version and types of Faker.js (1.5.3) built directly into it. This means that the import from `faker-extra` functions exactly the same as the original Faker.js package (and can even be used as a drop-in replacement for the original package too).
 
-The only difference is that `faker-extra` has an optional extra property called `extra` that can be accessed by means of `faker-extra`. You can use the original faker methods and the extra methods as follows:
+The only difference is that `faker-extra` has an optional extra property called `extra`. You can use it as follows:
 
 
   ```js
   import faker from 'faker-extra';
-
   faker.seed(1);
 
-  const competitorIds = faker.extra.array([10, 3000], faker.datatype.uuid);
+  const ids = faker.extra.array([10, 3000], faker.datatype.uuid);
 
   const competitors = faker.extra.object(
-    competitorIds,
+    ids,
     () => ({
-      awards: faker.extra.array([0, 3], ['red', 'green', 'blue', 'orange'], true).
+      awards: faker.extra.array([0, 2], ['red', 'green', 'blue', 'orange'], true).
       score: faker.datatype.number({ min: 0, max: 1000 }),
       league: faker.extra.frequency({ bronze: 65, silver: 30, gold: 5 }),
+      attendance: faker.extra.object(["2019", "2020", "2021", "2022", "2023"], faker.datatypes.boolean),
     }),
   )
 
@@ -90,17 +90,17 @@ The only difference is that `faker-extra` has an optional extra property called 
   ```js
   /* An array of anywhere between 10 and 3000 unique IDs. */
 
-  const competitorId = faker.extra.array([10, 3000], faker.datatype.uuid);
+  const ids = faker.extra.array([10, 3000], faker.datatype.uuid);
   ```
 
 - **Returning an array of random length with no duplicates**:
 
   ```js
-  /* An array that contains between 0 and 3 separate values from source. */
+  /* An array that contains between 0 and 2 separate values from source. Note, the `true` argument ensures that a value can be added only once (for example you won't get `['red', 'red']`) */
 
-  const attended = faker.extra.array(
-    [0, 3],
-    ["2019", "2020", "2021", "2022", "2023"],
+  const awards = faker.extra.array(
+    [0, 2],
+    ['red', 'green', 'blue', 'orange'],
     true
   );
   ```
@@ -110,9 +110,7 @@ The only difference is that `faker-extra` has an optional extra property called 
   ```js
   /* An object that has all years and the amount of winners as values. */
 
-  const winners = faker.extra.object(["2019", "2020", "2021", "2022", "2023"], () =>
-    faker.datatype.number(10)
-  );
+  const attendance = faker.extra.object(["2019", "2020", "2021", "2022", "2023"], faker.datatypes.boolean);
   ```
 ## Installing
 
