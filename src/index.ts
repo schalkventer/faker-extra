@@ -179,8 +179,13 @@ export const object = <K extends string | number | symbol, T extends unknown, >(
   {} as Record<K, T>) as Record<K, T>
 }
 
-export default {
-  frequency,
-  array,
-  object,
+const obj = {
+  ...faker,
+  extra: {
+    frequency,
+    array,
+    object,
+  },
 }
+
+export default obj
