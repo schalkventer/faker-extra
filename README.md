@@ -1,3 +1,4 @@
+<!-- omit in toc -->
 # 🎠 Faker Extra
 
 [![](https://img.shields.io/npm/v/faker-extra)](https://www.npmjs.com/package/faker-extra) ![](https://img.shields.io/github/stars/schalkventer/faker-extra?style=social) ![](https://github.com/schalkventer/faker-extra/workflows/NPM%20Package/badge.svg) [![](https://img.shields.io/npm/dm/faker-extra.svg)](https://www.npmjs.com/package/faker-extra)
@@ -10,7 +11,17 @@ Contains original Faker.js functionality and extra methods, similar to [fs-extra
 
 ![](https://raw.githubusercontent.com/schalkventer/faker-extra/master/docs/assets/logo.png)
 
-## Embedded Faker
+<!-- omit in toc -->
+## Table of Contents
+
+- [Usage](#usage)
+- [Why Faker Extra?](#why-faker-extra)
+- [Installing](#installing)
+- [API](#api)
+  - [`faker.extra.frequency()`](#fakerextrafrequency)
+  - [`faker.extra.array()`](#fakerextraarray)
+  - [`faker.extra.object()`](#fakerextraobject)
+## Usage
 
 Due to the removal of the original Faker.js library from Github in early 2022, this project has the latest working version and types of Faker.js (1.5.3) built directly into it. This means that the import from `faker-extra` functions exactly in the same way as the original Faker.js package (and can even be used as a replacement for the original Package).
 
@@ -103,43 +114,19 @@ The only difference is that `faker-extra` has an optional extra property called 
     faker.datatype.number(10)
   );
   ```
-## Overview
-
-**Installing**
-
-- [ES Module](#es-modules)
-- [TypeScript](#typescript)
-- [CommonJS](#commonjs)
-- HTML _(coming soon)_
-
-**Usage:**
-
-- 🔢 [`faker.extra.frequency()`](#-fakrefrequency)
-- 🔁 [`faker.extra.array()`](#-fakerearray)
-- 🔀 [`faker.extra.object()`](#-fakereobject)
-
-**Examples:**
-
-- Basic JavaScript example _(coming soon)_
-- Using with Jest _(coming soon)_
-- Using with Mocha _(coming soon)_
-- Using in React _(coming soon)_
-
----
-
-## 💾 Installing
+## Installing
 
 1. **Run via terminal/command-line in root of project.**
 
    _Note: Packages should be installed as a development dependencies since you want to avoid using mock values in your production output._
 
-   `npm install --save-dev faker faker-extra`
+   `npm install --save-dev faker-extra`
 
 2. **Then import as follows:**
 
-   _Note: that you can also destructure only the required helpers (via named exports) if you want to reduce file size._
+   _Note: that you can also destructure the extra helpers (via named exports) if you want to reduce file size._
 
-   ##### ES Modules
+   **ES Modules**
 
    ```js
    import faker from "faker-extra";
@@ -148,7 +135,7 @@ The only difference is that `faker-extra` has an optional extra property called 
    faker.extra.array(10, Math.random);
    ```
 
-   ##### TypeScript
+   **TypeScript**
 
    ```ts
    import faker from "faker-extra";
@@ -157,7 +144,7 @@ The only difference is that `faker-extra` has an optional extra property called 
    faker.extra.array<number>(10, Math.random);
    ```
 
-   ##### CommonJS
+   **CommonJS**
 
    ```js
    const faker = require("faker-extra");
@@ -166,9 +153,8 @@ The only difference is that `faker-extra` has an optional extra property called 
    faker.extra.array(10, Math.random);
    ```
 
----
-
-## 🔢 `faker.extra.frequency()`
+## API
+### `faker.extra.frequency()`
 
 **Creates an array/object who's length is equal, or ranging between, predefined amounts.**
 
@@ -312,7 +298,7 @@ _Functions are automatically called by default. This means that if you want the 
 
 ---
 
-## 🔁 `faker.extra.array()`
+### `faker.extra.array()`
 
 **Returns an array created from pre-defined values.**
 
@@ -398,7 +384,7 @@ _Functions are automatically called by default. This means that if you want the 
 
 ---
 
-## 🔀 `faker.extra.object()`
+### `faker.extra.object()`
 
 **Returns an array created from pre-defined values.**
 
