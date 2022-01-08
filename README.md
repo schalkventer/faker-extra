@@ -1,7 +1,7 @@
 <!-- omit in toc -->
 # 🎠 Faker Extra
 
-[![](https://img.shields.io/npm/v/faker-extra)](https://www.npmjs.com/package/faker-extra) ![](https://img.shields.io/github/stars/schalkventer/faker-extra?style=social) ![](https://github.com/schalkventer/faker-extra/workflows/NPM%20Package/badge.svg) [![](https://img.shields.io/npm/dm/faker-extra.svg)](https://www.npmjs.com/package/faker-extra)
+[![](https://img.shields.io/npm/v/faker-extra)](https://www.npmjs.com/package/faker-extra) [![](https://img.shields.io/npm/dm/faker-extra.svg)](https://www.npmjs.com/package/faker-extra) ![](https://img.shields.io/github/stars/schalkventer/faker-extra?style=social) 
 
 _⭐️ If you find this useful please star it on [Github](https://github.com/schalkventer/faker-extra) ⭐️_
 
