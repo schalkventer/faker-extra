@@ -57,7 +57,7 @@ Contains original Faker.js functionality and extra methods, similar to [fs-extra
 
   faker.seed(1);
 
-  const competitorIds = faker.iteration([10, 3000], faker.random.uuid);
+  const competitorIds = faker.array([10, 3000], faker.random.uuid);
 
   const competitors = faker.object(
     competitorIds,
