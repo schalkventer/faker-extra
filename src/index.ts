@@ -181,6 +181,7 @@ export const object = <K extends string | number | symbol, T extends unknown, >(
 
 const obj = {
   ...faker,
+  seed: faker.seed,
   extra: {
     frequency,
     array,
