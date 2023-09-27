@@ -5,7 +5,9 @@
 
 [![deprecated](http://badges.github.io/stability-badges/dist/deprecated.svg)](http://github.com/badges/stability-badges)
 
-⚠ Note that this package is deprecated! It was originally created add missing functionality to the base Faker.js library. At the time the original maintainer of Faker.js was (to be frank), actively hostile towards outside contributors. This package was created as an add-on that to use alongside Faker.js. In 2022 it averaged at around 1,500 downloads/week. However, today Faker.js is managed by a completely different team, which have gone above and beyond to extend the library. With the recent addition of `helpers.multiple` base Faker.js now has all functionality covered by this add-on. I've begun removing Faker Extra from my own projects now, and am happy to retire it in favour of the base Faker.js library. Please support the new team at [https://fakerjs.dev/](https://fakerjs.dev/), they are doing amazing work! ⚠
+⚠ Note that this package is deprecated! It was originally created add missing functionality to the base Faker.js library. At the time the original maintainer of Faker.js was (to be frank), actively hostile towards outside contributors. This package was created as an add-on that to use alongside Faker.js. In 2022 it averaged at around 1,500 downloads/week.
+
+However, today Faker.js is managed by a completely different team, which have gone above and beyond to extend the library. With the recent addition of `helpers.multiple` base Faker.js now has all functionality covered by this add-on. I've begun removing Faker Extra from my own projects now, and am happy to retire it in favour of the base Faker.js library. Please support the new team at [https://fakerjs.dev/](https://fakerjs.dev/), they are doing amazing work! ⚠
 
 ---
 
